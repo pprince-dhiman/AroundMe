@@ -3,15 +3,19 @@ import "dotenv/config";
 import connectDB from "./config/db.js";
 import { clerkWebhooks } from "./controllers/webhooks.js";
 import cors from "cors"
+import { clerkMiddleware } from "@clerk/express"
 
 const app = express();
 const PORT = process.env.PORT;
 
-// clerk webhook
+// clerk webhook (needs raw data)
 app.post('/clerk-whook', express.raw({ type: 'application/json' }), clerkWebhooks);
 
 app.use(cors());
 app.use(express.json());
+
+// attaches auth to req.
+app.use(clerkMiddleware());
 
 app.get('/', (_, res) => {
     res.send("API is working ...");

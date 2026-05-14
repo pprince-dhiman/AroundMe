@@ -15,12 +15,11 @@ const Navbar = () => {
     // state for becoming organizer (becoming...)
     const [isLoading, setIsLoading] = useState(false);
     // temporary user state
-    const user = false;
 
     const navigate = useNavigate();
 
     // Clerk
-    const { isLoaded } = useUser();
+    const { isLoaded, user } = useUser();
 
     // Mobile menu toggle
     const toggleMobileMenu = () => {
@@ -60,13 +59,13 @@ const Navbar = () => {
                             {/* Organizer Button */}
                             <button
                                 onClick={
-                                    user.role === "user"
+                                    user.publicMetadata.role === "user"
                                         ? becomeOrganizerFn
                                         : dashboardFn
                                 }
                                 className="px-5 py-2.5 rounded-xl font-medium transition-all duration-200 hover:shadow-md active:scale-95 border border-[#054C73] cursor-pointer hover:text-white hover:bg-[#054C73]"
                             >
-                                {user.role === "user"
+                                {user.publicMetadata.role === "user"
                                     ? isLoading
                                         ? "Updating..."
                                         : "Become Organizer"
@@ -117,21 +116,6 @@ const Navbar = () => {
                     }
 
 
-
-                    {/* <div className="hidden md:flex items-center gap-4">
-
-                        {
-                            user ?
-                                <div> User </div> :
-                                <button disabled={!isLoaded}
-                                    onClick={() => { }}
-                                    className="px-5 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-md active:scale-95 border border-[#054C73] cursor-pointer hover:text-white hover:bg-[#054C73]"
-                                >
-                                    {isLoaded ? 'SignIn' : 'Loading...'}
-                                </button>
-                        }
-                    </div> */}
-
                     {/* MOBILE MENU BUTTON */}
                     <div className="md:hidden flex items-center gap-3">
                         <button
@@ -168,13 +152,13 @@ const Navbar = () => {
                                 {/* Organizer Button */}
                                 <button
                                     onClick={
-                                        user.role === "user"
+                                        user.publicMetadata.role === "user"
                                             ? becomeOrganizerFn
                                             : dashboardFn
                                     }
                                     className="w-full py-3 rounded-2xl text-lg font-medium bg-[#054C73] text-white"
                                 >
-                                    {user.role === "user"
+                                    {user.publicMetadata.role === "user"
                                         ? isLoading
                                             ? "Updating..."
                                             : "Become Organizer"
