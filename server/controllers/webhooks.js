@@ -11,16 +11,15 @@ export const clerkWebhooks = async (req, res) => {
 
         const payload = req.body;
         const headers = req.headers;
-        
+
         const whook = new Webhook(WEBHOOK_SECRET);
 
         // Throws on error, returns the verified content on success
         const event = await whook.verify(payload, headers);
 
         const { data, type } = event;
-        console.log(`Clerk Webhook received: ${type}`);
 
-        switch(type){
+        switch (type) {
             case 'user.created': {
                 const newUser = {
                     _id: data.id,
@@ -30,6 +29,24 @@ export const clerkWebhooks = async (req, res) => {
                 }
 
                 await User.create(newUser);
+                res.json({});
+                break;
+            }
+
+            case 'user.updated': {
+                const userData = {
+                    email: data.email_addresses[0].email_address,
+                    name: data.first_name + " " + data.last_name,
+                    profile_url: data.image_url,
+                }
+
+                await User.findByIdAndUpdate(data.id, userData);
+                res.json({});
+                break;
+            }
+
+            case 'user.deleted': {
+                await User.findByIdAndDelete(data.id);
                 res.json({});
                 break;
             }
