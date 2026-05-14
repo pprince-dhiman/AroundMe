@@ -1,5 +1,6 @@
 import { Webhook } from "svix";
 import User from "../models/user.js";
+import { clerkClient } from "@clerk/express";
 
 export const clerkWebhooks = async (req, res) => {
     try {
@@ -21,6 +22,14 @@ export const clerkWebhooks = async (req, res) => {
 
         switch (type) {
             case 'user.created': {
+                // set default role to user in clerk
+                await clerkClient.users.updateUserMetadata(data.id, {
+                    publicMetadata : {
+                        role: 'user'
+                    }
+                });
+
+                // sync new user with own DB.
                 const newUser = {
                     _id: data.id,
                     email: data.email_addresses[0].email_address,
