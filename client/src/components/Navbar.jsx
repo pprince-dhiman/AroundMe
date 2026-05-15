@@ -9,12 +9,14 @@ import {
 import { useNavigate, Link } from "react-router";
 import { Show, SignInButton, SignUpButton, UserButton, useUser } from '@clerk/react'
 import { toast } from "react-toastify";
+import axios from "axios"
+import { USER_BACKEND_API } from "../utils/constant";
+import { getToken } from "@clerk/react";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     // state for becoming organizer (becoming...)
     const [isLoading, setIsLoading] = useState(false);
-    // temporary user state
 
     const navigate = useNavigate();
 
@@ -28,11 +30,30 @@ const Navbar = () => {
 
     // Become organizer / dashboard
     const becomeOrganizerFn = async () => {
-        toast.success("You become an organiser.");
-        setIsLoading(true)
-        setTimeout(()=>{
-            setIsLoading(false)
-        }, 2000);
+        try {
+            setIsLoading(true);
+            const token = await getToken();
+            const res = await axios.post(`${USER_BACKEND_API}/become-organizer`, {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if(res.data.success){
+                navigate('org/dashboard');
+                toast.success(res.data.message);
+            }
+            else{
+                toast.error(res.data.message);
+            }
+        }
+        catch(err) {
+            console.log(err);
+            toast.error(err.message);
+        }
+        finally{
+            setIsLoading(false);
+        }
     };
 
     // Navigate to dashboard
