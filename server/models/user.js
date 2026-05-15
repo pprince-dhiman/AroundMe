@@ -17,15 +17,14 @@ const userSchema = new mongoose.Schema({
         type: String, 
         required: true,
     },
-    role: {
-        type: String,
-        enum: ['user', 'organizer'],
-        default: 'user'
-    },
     location: {
         type: String,
         default: ""
     },
+    registered_events: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event'
+    }],
     saved_events: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Event'
