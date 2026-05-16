@@ -5,6 +5,7 @@ export const isLoggedIn = (req, res, next) => {
         if (!userId) {
             return res.json({ success: false, message: "Please login to get details" });
         }
+        req.userId = userId;
 
         next();
     }

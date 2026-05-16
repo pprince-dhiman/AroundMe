@@ -5,6 +5,7 @@ import { clerkWebhooks } from "./controllers/webhooks.js";
 import cors from "cors"
 import { clerkMiddleware } from "@clerk/express"
 import userRouter from "./routes/user.routes.js";
+import orgRouter from "./routes/organization.route.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -22,7 +23,9 @@ app.get('/', (_, res) => {
     res.send("API is working ...");
 });
 
+// all routes
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/org', orgRouter);
 
 async function initConnections() {
     try {

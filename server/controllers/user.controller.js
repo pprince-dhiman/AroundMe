@@ -3,7 +3,7 @@ import User from "../models/user.js";
 
 export const becomeOrganizer = async (req, res) => {
     try {
-        const { userId } = req.auth();
+        const { userId } = req;
         await clerkClient.users.updateUserMetadata(userId, {
             publicMetadata: {
                 role: 'organizer'
@@ -20,14 +20,31 @@ export const becomeOrganizer = async (req, res) => {
 
 export const getUserData = async (req, res) => {
     try {
-        const { userId } = req.auth();
+        const { userId } = req;
         const user = await User.findById(userId);
-        
-        if(!user){
-            return res.json({ success: false, message: "User not found, Please register."});
+
+        if (!user) {
+            return res.json({ success: false, message: "User not found, Please register." });
         }
 
         res.json({ success: true, user });
+    }
+    catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
+    }
+}
+
+export const getUserRegisteredEvents = async (req, res) => {
+    try {
+        const { userId } = req;
+        const user = await User.findById(userId)
+            .populate('registered_events'); 
+        if (!user) {
+            return res.json({ success: false, message: "User not found, Please register." });
+        }
+
+        res.json({ success: true, registeredEvents: user });
     }
     catch (err) {
         console.log(err);

@@ -4,6 +4,7 @@ const organizationSchma = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
+        unique: true,
         required: true,
     },
     description: {
@@ -12,7 +13,7 @@ const organizationSchma = new mongoose.Schema({
         required: true,
     },
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         required: true,
     },
@@ -27,6 +28,7 @@ const organizationSchma = new mongoose.Schema({
     email: {
         type: String,
         trim: true,
+        unique: true,
         required: true,
     },
     phone: {
@@ -55,7 +57,7 @@ const organizationSchma = new mongoose.Schema({
     },
     members: [{
         user: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: "User",
         },
         role: {
