@@ -12,7 +12,7 @@ const hackathonSchema = new mongoose.Schema({
         max: { type: Number, required: true }
     },
     prizes: [{
-        position: { type: Number, required: true },
+        position: { type: String, required: true },
         reward: { type: String, required: true }
     }],
     tracks: [

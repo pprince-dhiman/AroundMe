@@ -7,16 +7,17 @@ const Home = () => {
   const handleClick = async() => {
     try{
       const token = await getToken();
-      const res = await axios.get(`${USER_BACKEND_API}/`, {
-        headers: { Authorization: `Bearer ${token}`}
-      });
+      console.log(token);
+      // const res = await axios.get(`${USER_BACKEND_API}/registered-events`, {
+      //   headers: { Authorization: `Bearer ${token}`}
+      // });
 
-      if(res.data.success){
-        console.log(res.data.user);
-      }
-      else{
-        toast.error(res.data.message);
-      }
+      // if(res.data.success){
+      //   console.log(res.data.registeredEvents);
+      // }
+      // else{
+      //   toast.error(res.data.message);
+      // }
     }
     catch(err){
       console.log(err);

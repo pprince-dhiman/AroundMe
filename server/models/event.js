@@ -67,8 +67,8 @@ const eventSchema = new mongoose.Schema({
     },
     pricing: {
         isFree: { type: Boolean, required: true },
-        amount: Number,
-        discount: Number,
+        amount: { type: Number, default: 0 },
+        discount: { type: Number, default: 0 },
         currency: { type: String, default: "INR", }
     },
     sponsors: [
@@ -86,7 +86,7 @@ const eventSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    details: {
+    specificEvent: {
         type: mongoose.Schema.Types.ObjectId,
         refPath: "category"
     },

@@ -1,6 +1,11 @@
 import exprpess from "express";
-const eventRouter = exprpess.Router();
+import { createEvent } from "../controllers/event.controller.js";
+import { isLoggedIn } from "../middlewares/auth.js";
 
-eventRouter.post('/')
+// mergeParams => need dynamic value (:orgId) from complete path, 
+// otherwise req.params.orgId is undefined.
+const eventRouter = exprpess.Router({ mergeParams: true });
+
+eventRouter.post('/', isLoggedIn,  createEvent);
 
 export default eventRouter;
