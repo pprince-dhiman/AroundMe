@@ -31,7 +31,7 @@ const culturalEventSchema = new mongoose.Schema({
         enum: ['formal', 'semi-formal', 'casual', 'traditional', 'partywear', 'any'],
         default: 'any'
     },
-    // for VIP, General, student pass
+    // Pass -> VIP/General/student 
     passes: [{
         name: {
             type: String,

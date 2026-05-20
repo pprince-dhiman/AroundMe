@@ -6,9 +6,9 @@ import cors from "cors"
 import { clerkMiddleware } from "@clerk/express"
 import userRouter from "./routes/user.routes.js";
 import orgRouter from "./routes/organization.route.js";
-import eventRouter from "./routes/event.route.js";
 import hackathonRouter from "./routes/hackathon.route.js";
 import workshopRouter from "./routes/workshop.route.js";
+import culturalEventRouter from "./routes/culturalEvent.route.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -31,6 +31,7 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/org', orgRouter);
 app.use('/api/v1/org/:orgId/hackathons', hackathonRouter);
 app.use('/api/v1/org/:orgId/workshops', workshopRouter);
+app.use('/api/v1/org/:orgId/culturalEvents', culturalEventRouter);
 
 async function initConnections() {
     try {

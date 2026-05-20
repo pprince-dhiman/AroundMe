@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const createHackathonSchema = z.object({
-    // validations for event(base) data 
+
     title: z.string().trim().min(5),
     description: z.string().trim().min(15),
     // category: z.enum(['Hackathon', 'Workshop', 'CulturalEvent']),
