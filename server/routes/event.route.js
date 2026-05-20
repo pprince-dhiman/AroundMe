@@ -4,8 +4,7 @@ import { isLoggedIn } from "../middlewares/auth.js";
 
 // mergeParams => need dynamic value (:orgId) from complete path, 
 // otherwise req.params.orgId is undefined.
-const eventRouter = exprpess.Router({ mergeParams: true });
+const eventRouter = exprpess.Router();
 
-eventRouter.post('/', isLoggedIn,  createEvent);
 
 export default eventRouter;

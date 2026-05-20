@@ -8,6 +8,7 @@ import userRouter from "./routes/user.routes.js";
 import orgRouter from "./routes/organization.route.js";
 import eventRouter from "./routes/event.route.js";
 import hackathonRouter from "./routes/hackathon.route.js";
+import workshopRouter from "./routes/workshop.route.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -28,7 +29,8 @@ app.get('/', (_, res) => {
 // all routes
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/org', orgRouter);
-app.use('/api/v1/org/:orgId/hackathon', hackathonRouter);
+app.use('/api/v1/org/:orgId/hackathons', hackathonRouter);
+app.use('/api/v1/org/:orgId/workshops', workshopRouter);
 
 async function initConnections() {
     try {

@@ -1,27 +1,26 @@
-import mongoose from "mongoose"
-import Organization from "../models/organization.js";
+import mongoose from "mongoose";
 import Event from "../models/event.js";
-import Hackathon from "../models/hackathon.js";
+import Workshop from "../models/workshop.js";
+import Organization from "../models/organization.js";
 
-export const createHackathonService = async ({ body, orgId }) => {
-    // creating a session, bcz I need to work on 2 models at the same time.
-    // event(base) + hackathon(detailed) => if 1 fails -> none should save document.
+export const createWorkshopService = async (body, orgId) => {
     const session = await mongoose.startSession();
     session.startTransaction();
 
     try {
         const organization = await Organization.findById(orgId).session(session);
+
         if (!organization) {
             throw new Error("Registered organization not found.");
         }
 
-        // Base event session
+        // base event session
         const event = await Event.create([
             {
                 title: body.title,
                 description: body.description,
                 organization: orgId,
-                category: 'Hackathon',
+                category: 'Workshop',
                 thumbnail: body.thumbnail,
                 mode: body.mode,
                 startDateTime: body.startDateTime,
@@ -44,31 +43,25 @@ export const createHackathonService = async ({ body, orgId }) => {
             event[0].venue = body.venue;
         }
 
-        // Hackathon session
-        const hackathon = await Hackathon.create([
-            {
-                eventId: event[0]._id,
-                teamSize: body.teamSize,
-                prizes: body.prizes,
-                tracks: body.tracks,
-                problemStatements: body.problemStatements,
-                mentors: body.mentors,
-                judges: body.judges,
-                judgingCriteria: body.judgingCriteria,
-                submissionDeadline: body.submissionDeadline,
-                rules: body.rules
-            }
-        ], { session });
+        // workshop session
+        const workshop = await Workshop.create([{
+            eventId: event[0]._id,
+            instructor: body.instructor,
+            skillLevel: body.skillLevel,
+            prerequisites: body.prerequisites,
+            agenda: body.agenda
+        }], { session });
 
-        event[0].specificEvent = hackathon[0]._id;
+        //specific event.
+        event[0].specificEvent = workshop[0]._id;
 
         await event[0].save({ session });
         await session.commitTransaction();
 
         return {
             event: event[0],
-            hackathon: hackathon[0]
-        };
+            workshop: workshop[0],
+        }
     }
     catch (err) {
         await session.abortTransaction();
