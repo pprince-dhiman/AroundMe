@@ -44,7 +44,7 @@ export const getUserRegisteredEvents = async (req, res) => {
             return res.json({ success: false, message: "User not found, Please register." });
         }
 
-        res.json({ success: true, registeredEvents: user });
+        res.json({ success: true, registeredEvents: user.registered_events });
     }
     catch (err) {
         console.log(err);

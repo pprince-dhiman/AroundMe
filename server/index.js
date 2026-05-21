@@ -9,6 +9,7 @@ import orgRouter from "./routes/organization.route.js";
 import hackathonRouter from "./routes/hackathon.route.js";
 import workshopRouter from "./routes/workshop.route.js";
 import culturalEventRouter from "./routes/culturalEvent.route.js";
+import eventRouter from "./routes/event.route.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -27,8 +28,9 @@ app.get('/', (_, res) => {
 });
 
 // all routes
-app.use('/api/v1/user', userRouter);
-app.use('/api/v1/org', orgRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/orgs', orgRouter);
+app.use('/api/v1/events', eventRouter);
 app.use('/api/v1/org/:orgId/hackathons', hackathonRouter);
 app.use('/api/v1/org/:orgId/workshops', workshopRouter);
 app.use('/api/v1/org/:orgId/culturalEvents', culturalEventRouter);

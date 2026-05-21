@@ -1,0 +1,28 @@
+import z from "zod";
+
+export const createOrgSchema = z.object({
+    name: z.string().trim(),
+    description: z.string().trim(),
+    logo: z.string().default(""),
+    banner: z.string().default(""),
+    email: z.email().trim().toLowerCase(),
+    phone: z.string().trim(),
+    website: z.string().default(""),
+    location: z.object({
+        address: z.string().trim(),
+        city: z.string().trim(),
+        state: z.string().trim(),
+        country: z.string().trim()
+    }),
+    organizationType: z.enum(["college", "company", "community", "startup", "ngo", "school", "other"]).default("other"),
+    foundedYear: z.number().min(1900),
+    members: z.array(
+        z.object({
+            user: z.string(),
+            role: z.enum(["owner", "admin", "manager"]).default("manager")
+        })
+    ),
+    totalWorkshops: z.number().default(0),
+    totalHackathons: z.number().default(0),
+    totalCulturalEvents: z.number().default(0),
+})

@@ -1,5 +1,5 @@
 import express from "express"
-import { isLoggedIn } from "../middlewares/auth.js";
+import { isLoggedIn } from "../middlewares/userAuth.js";
 import validate from "../middlewares/validate.middleware.js";
 import { createWorkshopSchema } from "../validators/workshop.validator.js";
 import { createWorkshopController } from "../controllers/workshop.controller.js";

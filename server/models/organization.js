@@ -59,6 +59,7 @@ const organizationSchma = new mongoose.Schema({
         user: {
             type: String,
             ref: "User",
+            required: true,
         },
         role: {
             type: String,
@@ -74,7 +75,7 @@ const organizationSchma = new mongoose.Schema({
         type: Number,
         default: 0,
     },
-    totalOtherEvents: {
+    totalCulturalEvents: {
         type: Number,
         default: 0,
     }

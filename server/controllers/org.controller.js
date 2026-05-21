@@ -1,51 +1,74 @@
+import { clerkClient } from "@clerk/express";
 import Organization from "../models/organization.js";
+import { createOrganizationService, updateOrganizationService } from "../services/organization.service.js";
 
-export const createOrganization = async (req, res) => {
+export const createOrganizationController = async (req, res) => {
     try {
         const { userId } = req;
-        const { name, description, email, phone, location, foundedYear, website, organizationType, members } = req.body;
 
-        if (!name || !description || !email || !phone || !location || !location.address || !location.city || !location.state || !location.country || !foundedYear) {
-            return res.json({ success: false, message: "Fill all the required fields" });
-        }
-
-        const existingOrg = await Organization.findOne({
-            $or: [{ name }, { email }]
-        });
-
-        if(existingOrg){
-            if(existingOrg.name === name){
-                return res.json({ success: false, message: "This name was already taken"});
-            }
-            if(existingOrg.email === email){
-                return res.json({ success: false, message: "This email was already taken"});
-            }
-        }
-
-        const dbLocation = {
-            address: location.address,
-            city: location.city,
-            state: location.state,
-            country: location.country
-        }
-
-        const newOrgData = {
-            name, description, email, phone, location: dbLocation, owner: userId, foundedYear
-        }
-
-        if (website) {
-            newOrgData.website = website;
-        }
-        if (organizationType) {
-            newOrgData.organizationType = organizationType;
-        }
-
-        // Add logo and banner through cloudinary
-
-        const org = await Organization.create(newOrgData);
-        res.json({ success: true, org, message: `${name} registered as organization.` });
+        const result = await createOrganizationService({ body: req.body, userId });
+        
+        res.json({ success: true, org: result, message: `${req.body.name} registered as organization.` });
     }
     catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
+    }
+}
+
+export const getAllOrganization = async (req, res) => {
+    try {
+        const orgs = await Organization.find({});
+
+        res.json({ success: true, organizations: orgs });
+    }
+    catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
+    }
+}
+
+export const getMyOrganizations = async (req, res) => {
+    try {
+        const { userId } = req;
+        const myOrgs = await Organization.find({ owner: userId });
+
+        res.json({ success: true, myOrgs });
+    }
+    catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.messgae });
+    }
+}
+
+export const getOrgById = async (req, res) => {
+    try {
+        const { orgId } = req.params;
+
+        const organization = await Organization.findById(orgId);
+        if (!organization) {
+            return res.json({ success: false, messge: "Organization does not found." });
+        }
+
+        res.json({ success: true, organization });
+    }
+    catch (err) {
+        console.log(err);
+        res.json({ success: false, messge: err.message });
+    }
+}
+
+export const updateOrg = async (req, res) => {
+    try{
+        // user update -> only self created orgs, not others
+        const { orgId } = req.params;
+        const { userId } = req;
+
+        const result = await updateOrganizationService({ body: req.body, orgId, userId});
+
+        res.json({ success: true, message: "Organization updated successfully,", updatedOrg: result });
+    }
+    catch(err){
         console.log(err);
         res.json({ success: false, message: err.message });
     }

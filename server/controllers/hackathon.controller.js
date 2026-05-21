@@ -1,6 +1,4 @@
-import Hackathon from "../models/hackathon.js";
 import { createHackathonService } from "../services/hackathon.service.js";
-import { createEvent } from "./event.controller.js";
 
 export const createHackathonController = async (req, res) => {
     try {
