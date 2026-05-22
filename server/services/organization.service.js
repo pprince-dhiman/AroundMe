@@ -1,3 +1,4 @@
+import Event from "../models/event.js";
 import Organization from "../models/organization.js";
 
 export const createOrganizationService = async ({ body, userId }) => {
@@ -96,6 +97,16 @@ export const updateOrganizationService = async ({ body, orgId, userId }) => {
     }
     catch (err) {
         console.log(err);
+        throw err;
+    }
+}
+
+export const getOrgEventsServices = async({ orgId }) => {
+    try{
+        const events = await Event.find({ organization: orgId });
+        return events;
+    }
+    catch(err){
         throw err;
     }
 }

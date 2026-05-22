@@ -1,13 +1,13 @@
 import { clerkClient } from "@clerk/express";
 import Organization from "../models/organization.js";
-import { createOrganizationService, updateOrganizationService } from "../services/organization.service.js";
+import { createOrganizationService, getOrgEventsServices, updateOrganizationService } from "../services/organization.service.js";
 
 export const createOrganizationController = async (req, res) => {
     try {
         const { userId } = req;
 
         const result = await createOrganizationService({ body: req.body, userId });
-        
+
         res.json({ success: true, org: result, message: `${req.body.name} registered as organization.` });
     }
     catch (err) {
@@ -59,16 +59,30 @@ export const getOrgById = async (req, res) => {
 }
 
 export const updateOrg = async (req, res) => {
-    try{
+    try {
         // user update -> only self created orgs, not others
         const { orgId } = req.params;
         const { userId } = req;
 
-        const result = await updateOrganizationService({ body: req.body, orgId, userId});
+        const result = await updateOrganizationService({ body: req.body, orgId, userId });
 
         res.json({ success: true, message: "Organization updated successfully,", updatedOrg: result });
     }
-    catch(err){
+    catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
+    }
+}
+
+export const getOrgEventsController = async (req, res) => {
+    try {
+        const {orgId} = req.params;
+
+        const result = await getOrgEventsServices({ orgId });
+
+        res.json({ success: true, orgEvents: result });
+    }
+    catch (err) {
         console.log(err);
         res.json({ success: false, message: err.message });
     }
