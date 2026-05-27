@@ -183,13 +183,13 @@ const Navbar = () => {
         {/* MOBILE MENU */}
         <div
             className={`lg:hidden overflow-hidden transition-all duration-500 ${isMobileMenuOpen
-                    ? "max-h-[600px] opacity-100 py-5"
+                    ? "max-h-150 opacity-100 py-5"
                     : "max-h-0 opacity-0"
                 }`}
         >
             <div className="px-5 pb-6">
 
-                <div className="bg-[#DFE9F4] rounded-[32px] p-5 shadow-[12px_12px_25px_#c7d0da,-12px_-12px_25px_#ffffff] space-y-4">
+                <div className="bg-[#DFE9F4] rounded-4xl p-5 shadow-[12px_12px_25px_#c7d0da,-12px_-12px_25px_#ffffff] space-y-4">
 
                     {/* SIGNED OUT */}
                     {!user && (
