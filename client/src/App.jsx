@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify"
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
+    <Footer />
     </>
   )
 }

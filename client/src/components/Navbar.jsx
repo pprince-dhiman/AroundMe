@@ -63,20 +63,148 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <div
-                        className="px-4 py-2 rounded-2xl font-bold text-2xl tracking-tight cursor-pointer hover:scale-105 transition-transform"
-                        style={{ color: "#054C73" }}
-                        onClick={() => navigate("/")}
-                    >
-                        AroundMe
-                    </div>
-                    {/* nav bar links for desktop */}
-                    {user && (
-                        <div className="hidden md:flex items-center gap-8">
+    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#DFE9F4]/80 border-b border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
 
+        {/* NAVBAR CONTAINER */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="h-20 flex items-center justify-between">
+
+                {/* LOGO */}
+                <div
+                    onClick={() => navigate("/")}
+                    className="flex items-center gap-3 cursor-pointer group"
+                >
+                    {/* Logo Circle
+                    <div className="w-12 h-12 rounded-2xl bg-[#DFE9F4] flex items-center justify-center shadow-[8px_8px_18px_#c7d0da,-8px_-8px_18px_#ffffff] transition-all duration-300 group-hover:scale-105">
+                        <span className="text-[#054C73] font-black text-xl">
+                            A
+                        </span>
+                    </div> */}
+
+                    {/* Logo Text */}
+                    <div>
+                        <h1 className="text-2xl font-black tracking-tight text-[#054C73]">
+                            AroundMe
+                        </h1>
+
+                        <p className="text-xs text-[#666666] -mt-1">
+                            Explore Local Events
+                        </p>
+                    </div>
+                </div>
+
+
+                {/* DESKTOP NAVIGATION */}
+                <div className="hidden lg:flex items-center gap-3">
+
+                    {user && (
+                        <>
+                            {/* My Tickets */}
+                            <Link
+                                to="/my-tickets"
+                                className="px-5 py-3 rounded-2xl text-[#333333] font-medium transition-all duration-300 hover:text-[#054C73] hover:shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
+                            >
+                                <span className="flex items-center gap-2">
+                                    <FaTicketAlt />
+                                    My Tickets
+                                </span>
+                            </Link>
+
+                            {/* Saved */}
+                            <Link
+                                to="/saved"
+                                className="px-5 py-3 rounded-2xl text-[#333333] font-medium transition-all duration-300 hover:text-[#054C73] hover:shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
+                            >
+                                <span className="flex items-center gap-2">
+                                    <FaHeart />
+                                    Saved
+                                </span>
+                            </Link>
+
+                            {/* ORGANIZER BUTTON */}
+                            <button
+                                onClick={
+                                    user.publicMetadata.role === "user"
+                                        ? becomeOrganizerFn
+                                        : dashboardFn
+                                }
+                                className="px-6 py-3 rounded-2xl bg-[#054C73] text-white font-semibold transition-all duration-300 hover:bg-[#04344e] active:scale-95"
+                            >
+                                {user.publicMetadata.role === "user"
+                                    ? isLoading
+                                        ? "Updating..."
+                                        : "Become Organizer"
+                                    : "Dashboard"}
+                            </button>
+                        </>
+                    )}
+
+
+                    {/* AUTH SECTION */}
+                    {isLoaded ? (
+                        <div className="flex items-center gap-3 ml-2">
+
+                            <Show when="signed-out">
+                                <div className="flex items-center gap-3">
+
+                                    {/* Sign In */}
+                                    <SignInButton className="px-5 py-2.5 rounded-2xl bg-[#054C73] text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer" />
+
+                                    {/* Sign Up */}
+                                    <SignUpButton className="px-5 py-2.5 rounded-2xl border border-[#054C73] text-[#054C73] font-medium transition-all duration-300 hover:bg-[#054C73] hover:text-white cursor-pointer" />
+                                </div>
+                            </Show>
+
+                            <Show when="signed-in">
+                                <div className="border-2 border-[#054C73]/70 px-1 pt-1 rounded-full">
+                                    <UserButton />
+                                </div>
+                            </Show>
+                        </div>
+                    ) : (
+                        <div className="px-5 py-2.5 rounded-2xl bg-gray-300 animate-pulse text-gray-500">
+                            Loading...
+                        </div>
+                    )}
+                </div>
+
+
+                {/* MOBILE MENU BUTTON */}
+                <button
+                    onClick={toggleMobileMenu}
+                    className="lg:hidden w-12 h-12 rounded-2xl bg-[#DFE9F4] flex items-center justify-center text-[#333333] shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
+                >
+                    {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+                </button>
+            </div>
+        </div>
+
+
+        {/* MOBILE MENU */}
+        <div
+            className={`lg:hidden overflow-hidden transition-all duration-500 ${isMobileMenuOpen
+                    ? "max-h-[600px] opacity-100 py-5"
+                    : "max-h-0 opacity-0"
+                }`}
+        >
+            <div className="px-5 pb-6">
+
+                <div className="bg-[#DFE9F4] rounded-[32px] p-5 shadow-[12px_12px_25px_#c7d0da,-12px_-12px_25px_#ffffff] space-y-4">
+
+                    {/* SIGNED OUT */}
+                    {!user && (
+                        <div className="flex flex-col gap-3">
+
+                            <SignInButton className="w-full py-3 rounded-2xl bg-[#054C73] text-white font-semibold" />
+
+                            <SignUpButton className="w-full py-3 rounded-2xl border border-[#054C73] text-[#054C73] font-semibold" />
+                        </div>
+                    )}
+
+
+                    {/* SIGNED IN */}
+                    {user && (
+                        <>
                             {/* Organizer Button */}
                             <button
                                 onClick={
@@ -84,7 +212,7 @@ const Navbar = () => {
                                         ? becomeOrganizerFn
                                         : dashboardFn
                                 }
-                                className="px-5 py-2.5 rounded-xl font-medium transition-all duration-200 hover:shadow-md active:scale-95 border border-[#054C73] cursor-pointer hover:text-white hover:bg-[#054C73]"
+                                className="w-full py-4 rounded-2xl bg-[#054C73] text-white font-semibold"
                             >
                                 {user.publicMetadata.role === "user"
                                     ? isLoading
@@ -93,126 +221,40 @@ const Navbar = () => {
                                     : "Dashboard"}
                             </button>
 
-                            {/* My Tickets */}
-                            <Link
-                                to="/my-tickets"
-                                className="flex items-center gap-2 text-[#333333] hover:text-[#054C73] font-medium transition-colors"
-                            >
-                                <FaTicketAlt className="text-lg" />
-                                My Tickets
-                            </Link>
+                            {/* LINKS */}
+                            <div className="flex flex-col gap-3">
 
-                            {/* Saved */}
-                            <Link
-                                to="/saved"
-                                className="flex items-center gap-2 text-[#333333] hover:text-[#054C73] font-medium transition-colors"
-                            >
-                                <FaHeart className="text-lg" />
-                                Saved
-                            </Link>
-                        </div>
-                    )}
-                    {
-                        isLoaded ?
-                            (
-                                <div className="hidden md:flex items-center gap-4">
-                                    <Show when="signed-out">
-                                        <SignInButton className="px-5 py-2 rounded-xl font-medium bg-[#054C73] transition-all duration-200 hover:shadow-md active:scale-95 border cursor-pointer text-white hover:bg-[#023e5e]" />
-                                        <SignUpButton className="px-5 py-2 rounded-xl font-medium transition-all duration-200 hover:shadow-md active:scale-95 border border-[#054C73] cursor-pointer hover:text-white hover:bg-[#054C73]" />
-                                    </Show>
-                                    <Show when="signed-in">
-                                        <UserButton />
-                                    </Show>
-                                </div>
-                            )
-                            :
-                            (
-                                <div
-                                    className="px-5 py-2 rounded-xl font-medium bg-gray-300/60 cursor-not-allowed text-gray-600"
+                                <Link
+                                    to="/my-tickets"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="flex items-center gap-3 px-4 py-4 rounded-2xl text-[#333333] font-medium shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
                                 >
-                                    Loading...
+                                    <FaTicketAlt className="text-[#054C73]" />
+                                    My Tickets
+                                </Link>
+
+                                <Link
+                                    to="/saved"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="flex items-center gap-3 px-4 py-4 rounded-2xl text-[#333333] font-medium shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
+                                >
+                                    <FaHeart className="text-[#054C73]" />
+                                    Saved Events
+                                </Link>
+                            </div>
+
+                            {/* USER BUTTON */}
+                            <div className="flex justify-center pt-2">
+                                <div className="bg-[#DFE9F4] rounded-2xl p-1 shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]">
+                                    <UserButton />
                                 </div>
-                            )
-
-                    }
-
-
-                    {/* MOBILE MENU BUTTON */}
-                    <div className="md:hidden flex items-center gap-3">
-                        <button
-                            onClick={toggleMobileMenu}
-                            className="text-2xl text-[#333333] p-2"
-                        >
-                            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-                        </button>
-                    </div>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
-
-            {/* MOBILE MENU */}
-            {isMobileMenuOpen && (
-                <div className="md:hidden bg-white border-t flex flex-col items-center justify-center gap-2">
-                    <div className="mt-2">
-                        {/* Clerk User Button in Mobile */}
-                        {user ?
-                            (
-                                <div>User</div>
-                            ) :
-                            (
-                                <SignInButton
-                                    className="my-2 mx-5 py-2 px-10 rounded-2xl text-lg font-medium bg-[#054C73] text-white"
-                                />
-                            )
-                        }
-                    </div>
-
-                    <div className="px-4 py-6 space-y-5">
-
-                        {user && (
-                            <>
-                                {/* Organizer Button */}
-                                <button
-                                    onClick={
-                                        user.publicMetadata.role === "user"
-                                            ? becomeOrganizerFn
-                                            : dashboardFn
-                                    }
-                                    className="w-full py-3 rounded-2xl text-lg font-medium bg-[#054C73] text-white"
-                                >
-                                    {user.publicMetadata.role === "user"
-                                        ? isLoading
-                                            ? "Updating..."
-                                            : "Become Organizer"
-                                        : "Dashboard"}
-                                </button>
-
-                                {/* Links */}
-                                <div className="flex flex-col gap-4 text-[#333333]">
-
-                                    <Link
-                                        to="/my-tickets"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className="flex items-center gap-3 py-3 text-lg hover:text-[#054C73]"
-                                    >
-                                        <FaTicketAlt />
-                                        My Tickets
-                                    </Link>
-
-                                    <Link
-                                        to="/saved"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className="flex items-center gap-3 py-3 text-lg hover:text-[#054C73]"
-                                    >
-                                        <FaHeart />
-                                        Saved
-                                    </Link>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </div>
-            )}
-        </nav>
+        </div>
+    </nav>
     );
 };
 
