@@ -4,7 +4,7 @@ import {
     FaUsers,
     FaTag,
 } from "react-icons/fa";
-import { calculateAmount, getStartDateTime } from "../utils/constant";
+import { calculateAmount, getStartDateTime } from "../../../utils/constant.js";
 
 const FeaturedEventsCard = ({ event }) => {
     const { startDate } = getStartDateTime({ startDateTime: event.startDateTime });

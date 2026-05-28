@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { EVENT_BACKEND_API } from "../utils/constant.js";
-import { getToken } from "@clerk/react";
 import { useDispatch } from "react-redux";
 import { setAllEvents } from "../features/event/eventSlice.js";
 
@@ -10,12 +9,9 @@ export default function useGetAllEvents() {
 
     useEffect(() => {
         async function getAllEvents() {
-            const token = await getToken();
 
             try {
-                const res = await axios.get(`${EVENT_BACKEND_API}/`, {
-                    headers: { Authorization: `Bearer ${token}` }
-                });
+                const res = await axios.get(`${EVENT_BACKEND_API}/`);
 
                 if (res.data.success) {
                     dispatch(setAllEvents(res.data.eventData));

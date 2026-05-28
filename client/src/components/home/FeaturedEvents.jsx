@@ -2,9 +2,9 @@
 import {
     FaArrowRight,
 } from "react-icons/fa";
-import FeaturedEventsCard from "./FeaturedEventsCard";
+import FeaturedEventsCard from "./cards/FeaturedEventsCard";
 import { useSelector } from "react-redux";
-import Loading from "./Loading";
+import Loading from "../Loading";
 
 // const events = [
 //     {

@@ -1,6 +1,6 @@
-import LatestEventsCard from "./LatestEventsCard";
+import LatestEventsCard from "./cards/LatestEventsCard";
 import { useSelector } from "react-redux";
-import Loading from "./Loading";
+import Loading from "../Loading";
 
 export default function LatestEvents() {
 

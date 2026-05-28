@@ -5,6 +5,7 @@ import {
     FaMicrophone,
     FaArrowCircleRight,
 } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 const categories = [
     {
@@ -12,28 +13,34 @@ const categories = [
         title: "Hackathons",
         description: "Compete, build and innovate with developers.",
         icon: FaCode,
+        path: "/hackathons"
     },
     {
         id: 2,
         title: "Workshops",
         description: "Learn new skills from industry experts.",
         icon: FaLaptopCode,
+        path: "/workshops"
     },
     {
         id: 3,
-        title: "College Fests",
+        title: "Cultural Events",
         description: "Enjoy cultural, tech and fun college events.",
         icon: FaUsers,
+        path: "/cultural-events"
     },
     {
         id: 4,
         title: "Tech Meetups",
         description: "Connect with local tech communities.",
         icon: FaMicrophone,
+        path: "/"
     },
 ];
 
 const Category = () => {
+    const navigate = useNavigate();
+
     return (
         <section className="bg-linear-to-b from-[#DFE9F4] to-white py-20 px-6">
 
@@ -51,7 +58,7 @@ const Category = () => {
                 <p className="mt-5 max-w-2xl mx-auto text-[#666666] text-lg leading-relaxed">
                     Find hackathons, workshops, meetups and exciting local
                     events happening around you.
-                </p>    
+                </p>
             </div>
 
 
@@ -84,8 +91,13 @@ const Category = () => {
                             </div>
 
                             {/* BUTTON */}
-                            <button className="mt-6 text-[#054C73] font-semibold hover:underline cursor-pointer flex items-center gap-2">
-                                Explore <FaArrowCircleRight/>
+                            <button
+                                onClick={() => {
+                                    navigate(category.path);
+                                    scrollTo(0, 0);
+                                }}
+                                className="mt-6 text-[#054C73] font-semibold hover:underline cursor-pointer flex items-center gap-2">
+                                Explore <FaArrowCircleRight />
                             </button>
                         </div>
                     );
