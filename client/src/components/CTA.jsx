@@ -10,7 +10,7 @@ export default function FeaturedBanner() {
                 <div className="grid lg:grid-cols-2 overflow-hidden border border-[#d9e4ee]">
 
                     {/* LEFT IMAGE */}
-                    <div className="relative h-[260px] lg:h-[320px] overflow-hidden my-10">
+                    <div className="relative h-65 lg:h-80 overflow-hidden my-10">
 
                         {/* Event Image */}
                         <img
@@ -20,7 +20,7 @@ export default function FeaturedBanner() {
                         />
 
                         {/* Floating Mini Card */}
-                        <div className="absolute bottom-5 left-5 bg-white/85 backdrop-blur-sm border border-white/40 px-4 py-3 shadow-lg max-w-[220px]">
+                        <div className="absolute bottom-5 left-5 bg-white/85 backdrop-blur-sm border border-white/40 px-4 py-3 shadow-lg max-w-55">
 
                             <p className="text-[10px] uppercase tracking-[0.22em] text-[#666666] mb-1">
                                 Trending

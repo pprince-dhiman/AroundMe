@@ -1,9 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
 
-// ============================================
-// LatestEventsCard.jsx
-// ============================================
-
 export default function LatestEventsCard({ event }) {
     return (
         <div
@@ -24,7 +20,7 @@ export default function LatestEventsCard({ event }) {
             <div className="h-[40%] w-full overflow-hidden">
 
                 <img
-                    src={event.image}
+                    src={event.thumbnail}
                     alt={event.title}
                     className="
                         w-full
@@ -37,9 +33,7 @@ export default function LatestEventsCard({ event }) {
                 />
             </div>
 
-            {/* ============================================ */}
-            {/* CONTENT SECTION (60%) */}
-            {/* ============================================ */}
+            {/* Content section */}
             <div
                 className="
                     h-[60%]

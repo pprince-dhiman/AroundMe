@@ -4,8 +4,11 @@ import {
     FaUsers,
     FaTag,
 } from "react-icons/fa";
+import { calculateAmount, getStartDateTime } from "../utils/constant";
 
 const FeaturedEventsCard = ({ event }) => {
+    const { startDate } = getStartDateTime({ startDateTime: event.startDateTime });
+
     return (
         <div
             className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition duration-300 group"
@@ -27,13 +30,13 @@ const FeaturedEventsCard = ({ event }) => {
 
                 {/* PRICE */}
                 <div className="absolute top-4 right-4">
-                    {event.isFree ? (
+                    {event.pricing.isFree ? (
                         <span className="bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
                             Free
                         </span>
                     ) : (
                         <span className="bg-white text-gray-900 text-xs font-semibold px-3 py-1 rounded-full shadow">
-                            ₹{event.amount}
+                            ₹{calculateAmount({ amount: event.pricing.amount, discount: event.pricing.discount })}
                         </span>
                     )}
                 </div>
@@ -59,14 +62,14 @@ const FeaturedEventsCard = ({ event }) => {
                     <div className="flex items-center gap-2">
                         <FaCalendarAlt className="text-gray-400 group-hover:text-[#054C73]" />
                         <span>
-                            {event.startDate}
+                            {startDate}
                         </span>
                     </div>
 
                     <div className="flex items-center gap-2">
                         <FaMapMarkerAlt className="text-gray-400 group-hover:text-[#054C73]" />
                         <span>
-                            {event.city}, {event.state}
+                            {event.mode === 'online' ? 'ONLINE' : `${event.venue?.city}, ${event.venue?.state}`}
                         </span>
                     </div>
 
@@ -74,7 +77,7 @@ const FeaturedEventsCard = ({ event }) => {
                         <FaUsers className="text-gray-400 group-hover:text-[#054C73]" />
                         <span>
                             {event.currentParticipants}/
-                            {event.participants} Joined
+                            {event.maxParticipants} Joined
                         </span>
                     </div>
                 </div>

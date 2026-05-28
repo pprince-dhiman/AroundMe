@@ -23,7 +23,6 @@ const eventSchema = new mongoose.Schema({
     },
     thumbnail: {
         type: String,
-        default: "",
     },
     tags: {
         type: [String],

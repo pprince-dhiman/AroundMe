@@ -4,8 +4,7 @@ export const createWorkshopSchema = z.object({
     // validations for event(base) data 
     title: z.string().trim().min(5),
     description: z.string().trim().min(15),
-    // category: z.enum(['Hackathon', 'Workshop', 'CulturalEvent']),
-    thumbnail: z.string().optional().default(""),
+    thumbnail: z.string(),
     mode: z.enum(['online', 'offline']),
     // venue and onlineLink depends on the mode, so they are handled in WorkshopService.
     venue: z.object({

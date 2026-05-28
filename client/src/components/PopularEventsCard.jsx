@@ -13,7 +13,7 @@ const PopularEventsCard = ({ event }) => {
             {/* Poster */}
             <div className="relative overflow-hidden">
                 <img
-                    src={event.image}
+                    src={event.thumbnail}
                     alt={event.title}
                     className="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
@@ -24,7 +24,7 @@ const PopularEventsCard = ({ event }) => {
                 {/* Event Type */}
                 <div className="absolute top-4 left-4">
                     <div className="flex items-center rounded-2xl gap-2 bg-white/90 backdrop-blur-sm px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-gray-800">
-                        {event.type === "online" ? (
+                        {event.mode === "online" ? (
                             <>
                                 <FaLaptopCode className="text-[10px]" />
                                 Online
@@ -54,9 +54,8 @@ const PopularEventsCard = ({ event }) => {
 
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                     <FaMapMarkerAlt className="text-xs opacity-70" />
-
                     <span className="font-medium uppercase tracking-wide text-gray-800">
-                        {event.location}
+                        {event.mode==='online' ? "ONLINE" : `${event.venue.city}, ${event.venue.state}`}
                     </span>
                 </div>
             </div>
