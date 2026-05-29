@@ -19,11 +19,11 @@ const organizationSchma = new mongoose.Schema({
     },
     logo: {
         type: String,
-        default: "",
+        required: true,
     },
     banner: {
         type: String,
-        default: "",
+        required: true
     },
     email: {
         type: String,

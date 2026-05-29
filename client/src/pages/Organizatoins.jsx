@@ -1,6 +1,7 @@
 import { FaGlobeAsia } from "react-icons/fa";
 import useGetAllOrgs from "../hooks/useGetAllOrgs";
 import AllOrganizers from "../components/organization/AllOrganizers";
+import AllOrganizations from "../components/organization/AllOrganizations";
 
 const Organizatoins = () => {
   useGetAllOrgs();
@@ -39,8 +40,11 @@ const Organizatoins = () => {
           </p>
         </div>
 
-        {/* allOrganizers */}
+        {/* all organizers */}
         <AllOrganizers />
+
+        {/* all organizations */}
+        <AllOrganizations />
         
       </div>
     </section>

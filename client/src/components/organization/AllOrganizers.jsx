@@ -36,7 +36,7 @@ export default function AllOrganizers() {
       {/* Heading */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-3xl font-bold text-black">Explore Organizers</h2>
+          <h2 className="text-3xl font-bold text-gray-900/80">ORGANIZERS</h2>
         </div>
       </div>
 

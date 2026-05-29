@@ -3,8 +3,8 @@ import z from "zod";
 export const createOrgSchema = z.object({
     name: z.string().trim(),
     description: z.string().trim(),
-    logo: z.string().default(""),
-    banner: z.string().default(""),
+    logo: z.string(),
+    banner: z.string(),
     email: z.email().trim().toLowerCase(),
     phone: z.string().trim(),
     website: z.string().default(""),
