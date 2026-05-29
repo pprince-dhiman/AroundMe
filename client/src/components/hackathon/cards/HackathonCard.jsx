@@ -11,25 +11,13 @@ export default function HackathonCard({ hackathon }) {
         <div
             className=" group bg-white rounded-2xl overflow-hidden border border-[#DFE9F4] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full "
         >
-
-            {/* =====================================
-                THUMBNAIL
-            ====================================== */}
             <div className="relative overflow-hidden h-52">
 
-                {/* Image */}
+                {/* Thumbnail */}
                 <img
                     src={hackathon.thumbnail}
                     alt={hackathon.title}
-                    className="
-                        w-full
-                        h-full
-                        object-cover
-                        group-hover:scale-105
-                        transition-transform
-                        duration-500
-                    "
-                />
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/20"></div>
@@ -42,28 +30,16 @@ export default function HackathonCard({ hackathon }) {
                 </div>
             </div>
 
-            {/* =====================================
-                CONTENT
-            ====================================== */}
             <div className="flex flex-col grow p-6">
 
                 {/* Title */}
                 <h2
-                    className="
-                        text-xl
-                        font-bold
-                        text-[#333333]
-                        line-clamp-2
-                        mb-3
-                    "
+                    className=" text-xl font-bold text-[#333333] line-clamp-2 mb-3"
                 >
                     {hackathon.title}
                 </h2>
                 <hr className="mb-3" />
 
-                {/* =====================================
-                    DETAILS
-                ====================================== */}
                 {/* Registration Deadline */}
                 <div className="flex items-center gap-3 text-sm mb-3">
                     <FaCalendarAlt className="text-[#054C73]" />

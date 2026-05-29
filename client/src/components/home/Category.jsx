@@ -71,7 +71,8 @@ const Category = () => {
                     return (
                         <div
                             key={category.id}
-                            className="group bg-[#F2F5FF] rounded-xl p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl border border-white/40"
+                            onClick={()=>navigate(category.path)}
+                            className="group bg-[#F2F5FF] rounded-xl p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl border border-white/40 select-none"
                         >
 
                             {/* ICON */}

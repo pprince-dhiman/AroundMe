@@ -18,8 +18,8 @@ export const getRegistrationDeadline = (deadline) => {
 
     // Date -> 27/05/2026
     const formattedDate = dateObj.toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "2-digit",
+        day: "numeric",
+        month: "short",
         year: "numeric",
     });
 

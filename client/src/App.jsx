@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify"
 import Footer from "./components/Footer";
 import AllHakathons from "./pages/AllHakathons";
+import AllWorkshops from "./pages/AllWorkshops";
+import AllCulturalEvents from "./pages/AllCulturalEvents";
 
 const App = () => {
   return (
@@ -13,6 +15,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hackathons" element={<AllHakathons />} />
+        <Route path="/workshops" element={<AllWorkshops />} />
+        <Route path="/cultural-events" element={<AllCulturalEvents />} />
       </Routes>
     <Footer />
     </>

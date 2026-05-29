@@ -8,9 +8,6 @@ export default function LatestHackathons() {
     return (
         <section className="py-16">
 
-            {/* =========================
-                SECTION HEADER
-            ========================== */}
             <div className="flex items-center justify-between">
                 <div className="mb-10">
 
