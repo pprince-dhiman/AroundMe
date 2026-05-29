@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import AllHakathons from "./pages/AllHakathons";
 import AllWorkshops from "./pages/AllWorkshops";
 import AllCulturalEvents from "./pages/AllCulturalEvents";
+import Organizatoins from "./pages/Organizatoins";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/hackathons" element={<AllHakathons />} />
         <Route path="/workshops" element={<AllWorkshops />} />
         <Route path="/cultural-events" element={<AllCulturalEvents />} />
+        <Route path="/organizations" element={<Organizatoins />} />
       </Routes>
     <Footer />
     </>

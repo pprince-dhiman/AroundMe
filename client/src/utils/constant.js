@@ -1,5 +1,6 @@
 export const USER_BACKEND_API = "http://localhost:8000/api/v1/users";
 export const EVENT_BACKEND_API = "http://localhost:8000/api/v1/events";
+export const ORG_BACKEND_API = "http://localhost:8000/api/v1/orgs";
 
 export const calculateAmount = ({ amount, discount }) => {
     return Math.floor(amount - ((amount * discount) / 100));
