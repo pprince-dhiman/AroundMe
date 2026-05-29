@@ -18,7 +18,8 @@ export const createOrganizationController = async (req, res) => {
 
 export const getAllOrganization = async (req, res) => {
     try {
-        const orgs = await Organization.find({});
+        const orgs = await Organization.find({})
+        .populate('owner');
 
         res.json({ success: true, organizations: orgs });
     }

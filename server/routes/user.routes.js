@@ -1,10 +1,11 @@
 import express from "express"
-import { becomeOrganizer, getUserData, getUserRegisteredEvents } from "../controllers/user.controller.js";
+import { becomeOrganizer, getOrganizers, getUserData, getUserRegisteredEvents } from "../controllers/user.controller.js";
 import { isLoggedIn } from "../middlewares/userAuth.js";
 const userRouter = express.Router();
 
 userRouter.post("/become-organizer", isLoggedIn, becomeOrganizer);
 userRouter.get("/", isLoggedIn, getUserData);
+userRouter.get("/organizers", getOrganizers);
 userRouter.get("/registered-events", isLoggedIn, getUserRegisteredEvents);
 
 export default userRouter;

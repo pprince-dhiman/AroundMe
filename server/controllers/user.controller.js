@@ -8,7 +8,10 @@ export const becomeOrganizer = async (req, res) => {
             publicMetadata: {
                 role: 'organizer'
             }
-        })
+        });
+        
+        // update role in DB
+        await User.findByIdAndUpdate(userId, { role: 'organizer' });
 
         res.json({ success: true, message: "You can register your organization now" });
     }
@@ -30,6 +33,17 @@ export const getUserData = async (req, res) => {
         res.json({ success: true, user });
     }
     catch (err) {
+        console.log(err);
+        res.json({ success: false, message: err.message });
+    }
+}
+
+export const getOrganizers = async (req, res) => {
+    try{
+        const organizers = await User.find({ role: 'organizer'});
+        res.json({ success: true, organizers });
+    }
+    catch(err){
         console.log(err);
         res.json({ success: false, message: err.message });
     }
