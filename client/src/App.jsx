@@ -7,6 +7,7 @@ import AllHakathons from "./pages/AllHakathons";
 import AllWorkshops from "./pages/AllWorkshops";
 import AllCulturalEvents from "./pages/AllCulturalEvents";
 import Organizatoins from "./pages/Organizatoins";
+import AllEvents from "./pages/AllEvents";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/workshops" element={<AllWorkshops />} />
         <Route path="/cultural-events" element={<AllCulturalEvents />} />
         <Route path="/organizations" element={<Organizatoins />} />
+        <Route path="/events" element={<AllEvents />} />
       </Routes>
     <Footer />
     </>

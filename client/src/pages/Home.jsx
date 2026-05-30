@@ -33,10 +33,10 @@ const Home = () => {
 
   return (
     <div>
-      <button onClick={handleClick}
+      {/* <button onClick={handleClick}
         className="border px-4 py-2 m-10 active:scale-95">
         GetToken
-      </button>
+      </button> */}
       {
         useGetAllEvents()
       }
