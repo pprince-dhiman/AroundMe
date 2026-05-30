@@ -8,7 +8,7 @@ export default function EventGrid({ eventType, modeType, searchedQry }) {
   const filteredEvents = events?.filter((event) => {
     const matchesCategory = !eventType || event.category === eventType;
     const matchesMode = !modeType || event.mode === modeType;
-    const matchesName = event.title.includes(searchedQry);
+    const matchesName = event.title.toLowerCase().includes(searchedQry.toLowerCase());
   
     return matchesCategory && matchesMode && matchesName;
   });

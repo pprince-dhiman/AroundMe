@@ -33,14 +33,14 @@ export default function AllEvents() {
               searchedQry={searchedQry}
               setSearchedQry={setSearchedQry}
             />
-            
+
           </div>
 
           {/* Main Content */}
           <div className="space-y-6">
             <div className="bg-white border border-[#DFE9F4] rounded p-6 shadow-sm h-[900px] overflow-y-auto">
               {/* all events */}
-              <EventGrid eventType={eventType} modeType={modeType} />
+              <EventGrid eventType={eventType} modeType={modeType} searchedQry={searchedQry}/>
             </div>
           </div>
         </div>
