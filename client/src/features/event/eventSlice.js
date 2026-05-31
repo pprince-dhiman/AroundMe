@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     AllEvents: null,
+    event: null,
 }
 
 const eventSlice = createSlice({
@@ -10,9 +11,12 @@ const eventSlice = createSlice({
     reducers: {
         setAllEvents: (state, action) => {
             state.AllEvents = action.payload;
+        },
+        setEvent: (state, action) => {
+            state.event = action.payload;
         }
     }
 });
 
-export const { setAllEvents } = eventSlice.actions;
+export const { setAllEvents, setEvent } = eventSlice.actions;
 export default eventSlice.reducer;

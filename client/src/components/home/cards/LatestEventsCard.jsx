@@ -1,9 +1,16 @@
 import { FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 export default function LatestEventsCard({ event }) {
-    return (
-        <div
-            className="
+  const navigate = useNavigate();
+
+  return (
+    <div
+      onClick={() => {
+        navigate(`events/${event._id}`);
+        scrollTo(0, 0);
+      }}
+      className="
                 bg-[#eff4f9]
                 rounded-md
                 overflow-hidden
@@ -16,13 +23,12 @@ export default function LatestEventsCard({ event }) {
                 hover:-translate-y-2
                 hover:shadow-md
             "
-        >
-            <div className="h-[40%] w-full overflow-hidden">
-
-                <img
-                    src={event.thumbnail}
-                    alt={event.title}
-                    className="
+    >
+      <div className="h-[40%] w-full overflow-hidden">
+        <img
+          src={event.thumbnail}
+          alt={event.title}
+          className="
                         w-full
                         h-full
                         object-cover
@@ -30,50 +36,47 @@ export default function LatestEventsCard({ event }) {
                         duration-500
                         hover:scale-110
                     "
-                />
-            </div>
+        />
+      </div>
 
-            {/* Content section */}
-            <div
-                className="
+      {/* Content section */}
+      <div
+        className="
                     h-[60%]
                     p-6
                     flex
                     flex-col
                     justify-between
                 "
-            >
+      >
+        {/* Text Content */}
+        <div>
+          {/* Title */}
+          <h3 className="text-xl font-bold text-[#333333] mb-4 line-clamp-2">
+            {event.title}
+          </h3>
 
-                {/* Text Content */}
-                <div>
+          {/* Description */}
+          <p className="text-[#666666] text-sm leading-7 line-clamp-5">
+            {event.description}
+          </p>
+        </div>
 
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-[#333333] mb-4 line-clamp-2">
-                        {event.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-[#666666] text-sm leading-7 line-clamp-5">
-                        {event.description}
-                    </p>
-                </div>
-
-                {/* Read More */}
-                <div className="flex justify-end mt-6">
-
-                    <button
-                        className="
+        {/* Read More */}
+        <div className="flex justify-end mt-6">
+          <button
+            className="
                             text-[#054C73]
                             font-semibold
                             text-sm
                             hover:underline
                             flex items-center gap-1
                         "
-                    >
-                        Read More <FaArrowRight />
-                    </button>
-                </div>
-            </div>
+          >
+            Read More <FaArrowRight />
+          </button>
         </div>
-    );
+      </div>
+    </div>
+  );
 }

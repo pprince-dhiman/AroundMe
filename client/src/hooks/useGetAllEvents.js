@@ -13,7 +13,7 @@ export default function useGetAllEvents() {
     async function getAllEvents() {
       try {
         const res = await axios.get(`${EVENT_BACKEND_API}/`);
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.success) {
           dispatch(setAllEvents(res.data.eventData));
         } else {
