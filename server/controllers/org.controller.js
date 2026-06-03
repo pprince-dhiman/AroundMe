@@ -5,8 +5,9 @@ import { createOrganizationService, getOrgEventsServices, updateOrganizationServ
 export const createOrganizationController = async (req, res) => {
     try {
         const { userId } = req;
+        const file  = req.files;
 
-        const result = await createOrganizationService({ body: req.body, userId });
+        const result = await createOrganizationService({ body: req.body, userId, file });
 
         res.json({ success: true, org: result, message: `${req.body.name} registered as organization.` });
     }
