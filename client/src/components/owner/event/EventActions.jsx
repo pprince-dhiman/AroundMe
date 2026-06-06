@@ -9,9 +9,10 @@ import {
   FaTrash,
 } from "react-icons/fa";
 
-export default function EventActions() {
+export default function EventActions({ onUpdate }) {
   const handleUpdate = () => {
-    console.log("Update clicked");
+    // console.log("Update clicked");
+    onUpdate();
   };
 
   const handleDelete = () => {

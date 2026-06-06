@@ -13,6 +13,8 @@ import FAQSection from "../../components/owner/event/FAQSection";
 import HackathonSection from "../../components/owner/event/HackathonSection";
 import WorkshopSection from "../../components/owner/event/WorkshopSection";
 import CulturalEventSection from "../../components/owner/event/CulturalEventSection";
+import UpdateEvent from "../../components/owner/event/UpdateEvent";
+import { useState } from "react";
 
 export default function ViewEvent() {
   const params = useParams();
@@ -21,6 +23,8 @@ export default function ViewEvent() {
   useGetDashboardEvent(eventId);
 
   const event = useSelector((state) => state.dashboard.eventDetail);
+
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   if (!event) {
     return <Loading />;
@@ -55,7 +59,13 @@ export default function ViewEvent() {
         </div>
 
         {/* Sticky Sidebar */}
-        <EventActions event={event} />
+        <EventActions onUpdate={() => setIsUpdateModalOpen(true)}/>
+
+        <UpdateEvent
+          isOpen={isUpdateModalOpen}
+          onClose={() => setIsUpdateModalOpen(false)}
+          event={event}
+        />
       </div>
     </div>
   );

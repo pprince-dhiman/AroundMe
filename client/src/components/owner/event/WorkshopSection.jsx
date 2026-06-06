@@ -1,3 +1,4 @@
+import defaultProfileImg from "../../../assets/defaultProfileImg.webp";
 
 export default function WorkshopSection({
   data,
@@ -12,7 +13,7 @@ export default function WorkshopSection({
 
       <div className="flex gap-4">
         <img
-          src={data.instructor.image}
+          src={data.instructor.image || defaultProfileImg}
           alt={data.instructor.name}
           className="h-20 w-20 rounded-full object-cover"
         />
@@ -30,8 +31,8 @@ export default function WorkshopSection({
 
       <div className="mt-6">
         <p>
-          <strong>Skill Level:</strong>{" "}
-          {data.skillLevel}
+          <strong>Required skill Level:</strong>{"  "}
+          {data.skillLevel.toUpperCase()}
         </p>
       </div>
 
