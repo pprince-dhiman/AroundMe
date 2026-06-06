@@ -78,6 +78,10 @@ const organizationSchma = new mongoose.Schema({
     totalCulturalEvents: {
         type: Number,
         default: 0,
+    },
+    totalRevenue: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true });
 

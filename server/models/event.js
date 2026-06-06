@@ -17,6 +17,12 @@ const eventSchema = new mongoose.Schema(
       ref: "Organization",
       required: true,
     },
+    organizer: {
+      type: String,
+      trim: true,
+      ref: "User",
+      required: true,
+    },
     category: {
       type: String,
       enum: ["Hackathon", "Workshop", "CulturalEvent"],

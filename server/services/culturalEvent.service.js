@@ -3,7 +3,7 @@ import Organization from "../models/organization.js";
 import Event from "../models/event.js";
 import CulturalEvent from "../models/culturalEvent.js";
 
-export const createCulturalEventService = async({ body, orgId }) => {
+export const createCulturalEventService = async({ body, orgId, userId }) => {
     const session = await mongoose.startSession();
     session.startTransaction();
 
@@ -18,6 +18,7 @@ export const createCulturalEventService = async({ body, orgId }) => {
             title: body.title,
             description: body.description,
             organization: orgId,
+            organizer: userId,
             category: 'CulturalEvent',
             thumbnail: body.thumbnail,
             tags: body.tags,

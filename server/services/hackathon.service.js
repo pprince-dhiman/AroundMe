@@ -3,7 +3,7 @@ import Organization from "../models/organization.js";
 import Event from "../models/event.js";
 import Hackathon from "../models/hackathon.js";
 
-export const createHackathonService = async ({ body, orgId }) => {
+export const createHackathonService = async ({ body, orgId, userId }) => {
     // creating a session, bcz I need to work on 2 models at the same time.
     // event(base) + hackathon(detailed) => if 1 fails -> none should save document.
     const session = await mongoose.startSession();
@@ -21,6 +21,7 @@ export const createHackathonService = async ({ body, orgId }) => {
                 title: body.title,
                 description: body.description,
                 organization: orgId,
+                organizer: userId,
                 category: 'Hackathon',
                 thumbnail: body.thumbnail,
                 mode: body.mode,

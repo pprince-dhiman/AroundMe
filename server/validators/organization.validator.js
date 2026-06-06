@@ -23,4 +23,5 @@ export const createOrgSchema = z.object({
     totalWorkshops: z.coerce.number().default(0),
     totalHackathons: z.coerce.number().default(0),
     totalCulturalEvents: z.coerce.number().default(0),
-})
+    totalRevenue: z.coerce.number().default(0),
+});

@@ -3,7 +3,7 @@ import Event from "../models/event.js";
 import Workshop from "../models/workshop.js";
 import Organization from "../models/organization.js";
 
-export const createWorkshopService = async (body, orgId) => {
+export const createWorkshopService = async (body, orgId, userId) => {
     const session = await mongoose.startSession();
     session.startTransaction();
 
@@ -20,6 +20,7 @@ export const createWorkshopService = async (body, orgId) => {
                 title: body.title,
                 description: body.description,
                 organization: orgId,
+                organizer: userId,
                 category: 'Workshop',
                 thumbnail: body.thumbnail,
                 mode: body.mode,
