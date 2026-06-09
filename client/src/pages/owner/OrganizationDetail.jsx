@@ -26,7 +26,7 @@ const OrganizationDetail = () => {
 
         <OrganizationAbout org={org} />
 
-        <OrganizationEvents events={events} />
+        <OrganizationEvents events={events} org={org}/>
 
         <EditOrganization
           isOpen={isEditOpen}
