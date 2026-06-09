@@ -3,10 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   dashboardData: null,
   eventDetail: null,
-}
+  orgs: null,
+  dashboardOrgDetail: null,
+};
 
 const dashboardSlice = createSlice({
-  name: 'dashboard',
+  name: "dashboard",
   initialState,
   reducers: {
     setDashboardData: (state, action) => {
@@ -14,9 +16,20 @@ const dashboardSlice = createSlice({
     },
     setDashboardEvent: (state, action) => {
       state.eventDetail = action.payload;
-    }
-  }
+    },
+    setDashboardOrgs: (state, action) => {
+      state.orgs = action.payload;
+    },
+    setDashboardOrgDetails: (state, action) => {
+      state.dashboardOrgDetail = action.payload;
+    },
+  },
 });
 
-export const { setDashboardData, setDashboardEvent } = dashboardSlice.actions;
+export const {
+  setDashboardData,
+  setDashboardEvent,
+  setDashboardOrgs,
+  setDashboardOrgDetails,
+} = dashboardSlice.actions;
 export default dashboardSlice.reducer;

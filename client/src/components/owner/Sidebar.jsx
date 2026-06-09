@@ -1,9 +1,9 @@
 import { NavLink, useNavigate } from "react-router";
-import { FiPlus, FiLogOut, FiChevronDown } from "react-icons/fi";
+import { FiPlus, FiLogOut } from "react-icons/fi";
 import { navigation } from "./navigation";
 import { toast } from "react-toastify";
 
-const Sidebar = ({ organizations = [], currentOrg }) => {
+const Sidebar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {

@@ -19,33 +19,35 @@ export default function Events() {
   return (
     <div className="h-full w-full rounded-xl border bg-white p-6">
       {/* Filters */}
-      <div className="mb-6 max-md:flex-col flex justify-around items-center">
-        <h2 className="text-center my-5 text-3xl font-bold text-gray-700">
+      <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <h2 className="text-center text-3xl font-bold text-gray-700">
           Events Organized
         </h2>
 
-        <div className="flex flex-wrap gap-2 rounded-lg border p-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`rounded-md px-4 py-2 text-sm transition ${
-                selectedCategory === category
-                  ? "bg-black text-white"
-                  : "hover:bg-gray-100"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+        <div className="flex flex-wrap items-center justify-center gap-3">
+
+          {/* Category Filters */}
+          <div className="flex flex-wrap gap-2 rounded-lg border p-2">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`rounded-md px-4 py-2 text-sm transition ${
+                  selectedCategory === category
+                    ? "bg-black text-white"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Scrollable Cards Section */}
       {events ? (
-        <div
-          className="overflow-y-auto pr-2 h-[750px] border-t border-gray-300 rounded-xl"
-        >
+        <div className="overflow-y-auto pr-2 h-[750px] border-t border-gray-300 rounded-xl">
           <div
             className="
             grid

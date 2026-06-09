@@ -13,6 +13,9 @@ import OwnerDashboardLayout from "./pages/owner/OwnerDashboardLayout.jsx";
 import DashboardHome from "./pages/owner/DashboardHome.jsx";
 import ViewEvent from "./pages/owner/ViewEvent.jsx";
 import Events from "./pages/owner/Events.jsx";
+import Organization from "./pages/owner/Organization.jsx";
+import CreateOrganization from "./pages/owner/CreateOrganization.jsx";
+import OrganizationDetail from "./pages/owner/OrganizationDetail.jsx";
 
 const App = () => {
   const isOrganizer = useMatch("/organizer/*");
@@ -33,10 +36,9 @@ const App = () => {
           <Route path="dashboard" element={<DashboardHome />} />
           <Route path="events" element={<Events />} />
           <Route path="events/:eventId" element={<ViewEvent />} />
-          {/* 
-          <Route path="/dashboard/events/:id/edit" element={<EditEvent />} />
-
-          <Route path="/dashboard/organizations" element={<Organizations />} /> */}
+          <Route path="organizations" element={<Organization />} />
+          <Route path="organizations/new" element={<CreateOrganization />} />
+          <Route path="organizations/:orgId" element={ <OrganizationDetail />} />
         </Route>
       </Routes>
       {!isOrganizer && <Footer />}
