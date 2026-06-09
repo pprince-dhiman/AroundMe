@@ -3,6 +3,7 @@ import { isLoggedIn } from "../middlewares/userAuth.js";
 import {
   createOrganizationController,
   getAllOrganization,
+  getDashboardOrgDetail,
   getMyOrganizations,
   getOrgById,
   getOrgEventsController,
@@ -28,6 +29,20 @@ orgRouter.post(
   validate(createOrgSchema),
   createOrganizationController,
 );
-orgRouter.patch("/:orgId", isLoggedIn, isOrganizer, updateOrg);
+orgRouter.patch(
+  "/:orgId",
+  isLoggedIn,
+  isOrganizer,
+  uploadOrgImages,
+  parseFormDataFields,
+  // validate(createOrgSchema),
+  updateOrg,
+);
+orgRouter.get(
+  "/dashboard/organization/:orgId",
+  isLoggedIn,
+  isOrganizer,
+  getDashboardOrgDetail,
+);
 
 export default orgRouter;

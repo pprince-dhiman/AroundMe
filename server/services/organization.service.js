@@ -68,9 +68,17 @@ export const createOrganizationService = async ({ body, userId, file }) => {
   }
 };
 
-export const updateOrganizationService = async ({ body, orgId, userId }) => {
+export const updateOrganizationService = async ({
+  body,
+  orgId,
+  userId,
+  file,
+}) => {
   try {
     const { name, email } = body;
+    const { logo, banner } = file;
+    let logoUrl = "";
+    let bannerUrl = "";
 
     const organization = await Organization.findById(orgId);
     if (!organization) {
@@ -98,8 +106,21 @@ export const updateOrganizationService = async ({ body, orgId, userId }) => {
       }
     }
 
-    /* everything is authenticated. now,
-        proceede to update */
+    if (logo) {
+      const bufferLogo = getDataURI(logo[0]);
+      logoUrl = await cloudinary.uploader.upload(bufferLogo.content, {
+        resource_type: "image",
+        folder: "AroundMe/Orgs/Logo",
+      });
+    }
+
+    if (banner) {
+      const bufferBanner = getDataURI(banner[0]);
+      bannerUrl = await cloudinary.uploader.upload(bufferBanner.content, {
+        resource_type: "image",
+        folder: "AroundMe/Orgs/Banner",
+      });
+    }
 
     // update logo and banner through cloudinary also
 
@@ -109,8 +130,8 @@ export const updateOrganizationService = async ({ body, orgId, userId }) => {
         name: name,
         email: email,
         description: body.description,
-        logo: body.logo,
-        banner: body.banner,
+        logo: logo ? logoUrl.secure_url : organization.logo,
+        banner: banner ? bannerUrl.secure_url : organization.banner,
         phone: body.phone,
         website: body.website,
         location: body.location,

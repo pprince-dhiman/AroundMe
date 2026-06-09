@@ -100,8 +100,8 @@ export const getDashboardEvent = async (req, res) => {
     const event = await Event.findById(eventId)
       .populate("organization")
       .populate("specificEvent")
-      .populate({ path: "organizer", select: "name"});
-      
+      .populate({ path: "organizer", select: "name" });
+
     if (!event) {
       return res.json({ success: false, message: "Event not found." });
     }
