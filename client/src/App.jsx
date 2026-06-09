@@ -16,6 +16,8 @@ import Events from "./pages/owner/Events.jsx";
 import Organization from "./pages/owner/Organization.jsx";
 import CreateOrganization from "./pages/owner/CreateOrganization.jsx";
 import OrganizationDetail from "./pages/owner/OrganizationDetail.jsx";
+import CreateEvent from "./pages/owner/CreateEvent.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 const App = () => {
   const isOrganizer = useMatch("/organizer/*");
@@ -39,7 +41,9 @@ const App = () => {
           <Route path="organizations" element={<Organization />} />
           <Route path="organizations/new" element={<CreateOrganization />} />
           <Route path="organizations/:orgId" element={ <OrganizationDetail />} />
+          <Route path="organizations/:orgId/event/new" element={ <CreateEvent /> } />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {!isOrganizer && <Footer />}
     </>
