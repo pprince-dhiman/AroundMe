@@ -1,3 +1,4 @@
+import defaultProfileImg from "../../../assets/defaultProfileImg.webp"
 
 export default function HackathonSection({ data }) {
   if (!data) return null;
@@ -128,7 +129,7 @@ function PeopleSection({
             className="rounded-lg border p-4"
           >
             <img
-              src={person.image}
+              src={person.image || defaultProfileImg}
               alt={person.name}
               className="mb-3 h-16 w-16 rounded-full object-cover"
             />
