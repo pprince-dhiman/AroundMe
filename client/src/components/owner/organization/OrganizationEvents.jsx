@@ -8,14 +8,6 @@ const OrganizationEvents = ({ events, org }) => {
 
   const [showMenu, setShowMenu] = useState(false);
 
-  const handleCreateEvent = (category) => {
-    setShowMenu(false);
-
-    navigate(
-      `/organizer/organizations/${org._id}/event/new?category=${category}`,
-    );
-  };
-
   return (
     <section className="rounded-3xl bg-white p-6 shadow-sm">
       <div className="mb-6 flex items-center justify-between">
@@ -34,21 +26,21 @@ const OrganizationEvents = ({ events, org }) => {
           {showMenu && (
             <div className="absolute right-0 z-10 mt-2 w-48 overflow-hidden rounded-lg border bg-white shadow-lg">
               <button
-                onClick={() => handleCreateEvent("Hackathon")}
+                onClick={() => navigate(`/organizer/organizations/${org._id}/event/hackathon/new`)}
                 className="block w-full px-4 py-3 text-left hover:bg-gray-100"
               >
                 Hackathon
               </button>
 
               <button
-                onClick={() => handleCreateEvent("Workshop")}
+                onClick={() => navigate(`/organizer/organizations/${org._id}/event/workshop/new`)}
                 className="block w-full px-4 py-3 text-left hover:bg-gray-100"
               >
                 Workshop
               </button>
 
               <button
-                onClick={() => handleCreateEvent("CulturalEvent")}
+                onClick={() => navigate(`/organizer/organizations/${org._id}/event/cultural-event/new`)}
                 className="block w-full px-4 py-3 text-left hover:bg-gray-100"
               >
                 Cultural Event

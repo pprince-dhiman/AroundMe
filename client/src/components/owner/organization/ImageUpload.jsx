@@ -5,23 +5,7 @@ const ImageUpload = ({ label, preview, onChange }) => {
     <div>
       <p className="mb-2 font-medium text-[#333333]">{label}</p>
 
-      <label
-        className="
-          flex
-          flex-col
-          items-center
-          justify-center
-          border-2
-          border-dashed
-          border-gray-300
-          rounded-xl
-          cursor-pointer
-          overflow-hidden
-          bg-[#F2F5FF]
-          hover:border-[#054C73]
-          transition
-        "
-      >
+      <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl cursor-pointer overflow-hidden bg-[#F2F5FF] hover:border-[#054C73] transition">
         {preview ? (
           <img src={preview} alt={label} className="w-full h-52 object-cover" />
         ) : (

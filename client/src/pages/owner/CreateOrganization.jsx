@@ -159,7 +159,6 @@ const CreateOrganization = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-[#333333]">
@@ -173,7 +172,6 @@ const CreateOrganization = () => {
 
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        
         {/* Image Section */}
         <section className="bg-white rounded-2xl border p-6">
           <h2 className="text-xl font-semibold mb-5">Organization Images</h2>
@@ -237,15 +235,7 @@ const CreateOrganization = () => {
 
             <select
               {...register("organizationType")}
-              className="
-                mt-1
-                w-full
-                rounded-lg
-                border
-                border-gray-300
-                px-4
-                py-2.5
-              "
+              className="mt-1 w-full rounded-lg border border-gray-300 px-4 py-2.5 "
             >
               <option value="college">College</option>
 

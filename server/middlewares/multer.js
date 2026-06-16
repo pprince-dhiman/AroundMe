@@ -15,4 +15,13 @@ export const uploadOrgImages = multer({
   storage,
   imageFilter,
   limits: { fileSize: 5 * 1024 * 1024 },
-}).fields([{ name: "logo", maxCount: 1 }, { name: "banner", maxCount: 1 }]);
+}).fields([
+  { name: "logo", maxCount: 1 },
+  { name: "banner", maxCount: 1 },
+]);
+
+export const uploadEventImage = multer({
+  storage,
+  imageFilter,
+  limits: { fileSize: 5 * 1024 * 1024 },
+}).single("thumbnail");

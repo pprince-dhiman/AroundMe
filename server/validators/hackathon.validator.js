@@ -2,9 +2,8 @@ import { z } from "zod";
 
 export const createHackathonSchema = z.object({
 
-    title: z.string().trim().min(5).max(30),
+    title: z.string().trim().min(5).max(50),
     description: z.string().trim().min(15).max(200),
-    thumbnail: z.string(),
     mode: z.enum(['online', 'offline']),
     // venue and onlineLink depends on the mode, so they are handled in hackathonService.
     venue: z.object({
@@ -28,7 +27,7 @@ export const createHackathonSchema = z.object({
     FAQs: z.array(z.object({
         question: z.string(),
         answer: z.string()
-    })).min(2),
+    })).min(1),
 
     // validations for hackathon data
     teamSize: z.object({

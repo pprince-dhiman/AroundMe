@@ -6,22 +6,13 @@ export const createEventSchema = z
       .string()
       .trim()
       .min(5, "Title must be at least 5 characters")
-      .max(30, "Title cannot exceed 30 characters"),
+      .max(50, "Title cannot exceed 50 characters"),
 
     description: z
       .string()
       .trim()
       .min(15, "Description must be at least 15 characters")
       .max(200, "Description cannot exceed 200 characters"),
-
-    // RHF stores uploaded file as FileList
-    thumbnail: z
-      .any()
-      .refine((files) => files?.length === 1, "Please upload a thumbnail")
-      .refine(
-        (files) => !files?.[0] || files[0].size <= 5 * 1024 * 1024,
-        "Thumbnail must be smaller than 5MB",
-      ),
 
     mode: z.enum(["online", "offline"], {
       error: "Please select event mode",
@@ -64,7 +55,7 @@ export const createEventSchema = z
           answer: z.string().trim().min(5, "Answer is required"),
         }),
       )
-      .min(2, "At least 2 FAQs are required"),
+      .min(1, "At least 1 FAQs are required"),
   })
 
   // Date Validations

@@ -98,7 +98,7 @@ const EditOrganization = ({ isOpen, onClose, org, events }) => {
     setBannerPreview(URL.createObjectURL(file));
   };
 
-  const submitForm = async(data) => {
+  const submitForm = async (data) => {
     try {
       const token = await getToken();
       const formData = new FormData();

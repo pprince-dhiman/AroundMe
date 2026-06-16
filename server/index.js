@@ -29,11 +29,11 @@ app.get('/', (_, res) => {
 
 // all routes
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/orgs', orgRouter);
 app.use('/api/v1/events', eventRouter);
-app.use('/api/v1/org/:orgId/hackathons', hackathonRouter);
-app.use('/api/v1/org/:orgId/workshops', workshopRouter);
-app.use('/api/v1/org/:orgId/culturalEvents', culturalEventRouter);
+app.use('/api/v1/orgs', orgRouter);
+app.use('/api/v1/orgs/:orgId/hackathons', hackathonRouter);
+app.use('/api/v1/orgs/:orgId/workshops', workshopRouter);
+app.use('/api/v1/orgs/:orgId/culturalEvents', culturalEventRouter);
 
 async function initConnections() {
     try {

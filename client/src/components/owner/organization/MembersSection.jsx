@@ -44,8 +44,7 @@ const MembersSection = ({ fields, register, append, remove, errors }) => {
 
           <select
             {...register(`members.${index}.role`)}
-            className=" border rounded-lg px-3 py-2
-            "
+            className=" border rounded-lg px-3 py-2"
           >
             <option value="owner">Owner</option>
 
