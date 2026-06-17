@@ -4,7 +4,11 @@ export const createWorkshopController = async (req, res) => {
   try {
     const { pricing, mode, venue, onlineLink } = req.body;
     const { orgId } = req.params;
-    const { userId } = req;
+    const { userId, file } = req;
+
+    if(!file) {
+      return res.json({ success: false, message: "Please upload a thumbnail."});
+    }
 
     // isFree->false : amount should be exists
     if (pricing.isFree === false && pricing.amount <= 10) {
@@ -36,7 +40,7 @@ export const createWorkshopController = async (req, res) => {
     }
 
     // hackathon service => All business logic for workshop.
-    const result = await createWorkshopService(req.body, orgId, userId);
+    const result = await createWorkshopService(req.body, orgId, userId, file);
 
     res.json({
       success: true,
