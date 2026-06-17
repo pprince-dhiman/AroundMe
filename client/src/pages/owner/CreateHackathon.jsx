@@ -426,7 +426,7 @@ const CreateHackathon = () => {
             disabled={isSubmitting}
             className="px-8 py-3 rounded-xl bg-[#054C73] text-white font-medium hover:opacity-90 disabled:opacity-60 "
           >
-            {isSubmitting ? "Creating..." : "Create Organization"}
+            {isSubmitting ? "Creating..." : "Create Hackathon"}
           </button>
         </div>
       </form>
