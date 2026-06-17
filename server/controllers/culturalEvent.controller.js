@@ -3,8 +3,12 @@ import { createCulturalEventService } from "../services/culturalEvent.service.js
 export const createCulturalEventController = async (req, res) => {
   try {
     const { orgId } = req.params;
-    const { userId } = req;
+    const { userId, file } = req;
     const { mode, onlineLink, venue, pricing } = req.body;
+
+    if (!file) {
+      return res.json({ success: false, message: "Please upload thumbnail." });
+    }
 
     if (mode === "online" && !onlineLink) {
       return res.json({
@@ -36,6 +40,7 @@ export const createCulturalEventController = async (req, res) => {
       body: req.body,
       orgId,
       userId,
+      file
     });
 
     res.json({
