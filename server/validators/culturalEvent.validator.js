@@ -4,7 +4,6 @@ export const createCulturalEventSchema = z.object({
     // event (base)
     title: z.string().trim().min(5),
     description: z.string().trim().min(15),
-    thumbnail: z.string(),
     mode: z.enum(['online', 'offline']),
     // venue and onlineLink depends on the mode, so they are handled in hackathonService.
     venue: z.object({
