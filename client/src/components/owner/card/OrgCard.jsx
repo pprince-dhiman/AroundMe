@@ -50,21 +50,21 @@ const OrganizationCard = ({ organization }) => {
         <div className="grid grid-cols-3 gap-2">
           <div className="bg-[#F2F5FF] rounded-lg p-3 text-center">
             <p className="text-lg font-bold text-[#054C73]">
-              {organization.stats?.totalWorkshops || 0}
+              {organization?.totalWorkshops || 0}
             </p>
             <p className="text-xs text-[#666666]">Workshops</p>
           </div>
 
           <div className="bg-[#F2F5FF] rounded-lg p-3 text-center">
             <p className="text-lg font-bold text-[#054C73]">
-              {organization.stats?.totalHackathons || 0}
+              {organization?.totalHackathons || 0}
             </p>
             <p className="text-xs text-[#666666]">Hackathons</p>
           </div>
 
           <div className="bg-[#F2F5FF] rounded-lg p-3 text-center">
             <p className="text-lg font-bold text-[#054C73]">
-              {organization.stats?.totalCulturalEvents || 0}
+              {organization?.totalCulturalEvents || 0}
             </p>
             <p className="text-xs text-[#666666]">Events</p>
           </div>

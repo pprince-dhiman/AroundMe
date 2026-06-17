@@ -20,6 +20,7 @@ import NotFound from "./pages/NotFound.jsx";
 import CreateHackathon from "./pages/owner/CreateHackathon.jsx";
 import CreateWorkshop from "./pages/owner/CreateWorkshop.jsx";
 import CreateCulturalEvent from "./pages/owner/CreateCulturalEvent.jsx";
+import UnderWorking from "./pages/owner/UnderWorking.jsx";
 
 const App = () => {
   const isOrganizer = useMatch("/organizer/*");
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="organizations/:orgId/event/hackathon/new" element={ <CreateHackathon /> } />
           <Route path="organizations/:orgId/event/workshop/new" element={ <CreateWorkshop /> } />
           <Route path="organizations/:orgId/event/cultural-event/new" element={ <CreateCulturalEvent /> } />
+          <Route path="*" element={<UnderWorking />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

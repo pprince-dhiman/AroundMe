@@ -8,25 +8,30 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     const isLeave = confirm("Are you sure to leave dashboard.");
-    if(!isLeave) return;
+    if (!isLeave) return;
 
-    navigate('/');
+    navigate("/");
     toast.success("Welcome Back.");
-  }
+  };
 
   return (
     <aside className="hidden lg:flex flex-col w-72 bg-white border-r border-gray-200 h-screen sticky top-0">
       {/* Logo */}
       <div className="px-6 py-6 border-b">
-        <h1 onClick={()=>navigate('/')}
-        className="text-2xl font-bold text-[#054C73] cursor-pointer">
+        <h1
+          onClick={() => navigate("/")}
+          className="text-2xl font-bold text-[#054C73] cursor-pointer"
+        >
           AroundMe
         </h1>
       </div>
 
       {/* Quick add org */}
       <div className="p-4 border-b">
-        <button className="mt-3 flex items-center gap-2 text-[#054C73] font-medium hover:opacity-80 px-3 py-1 border-l rounded">
+        <button
+          onClick={() => navigate("/organizer/organizations/new")}
+          className="mt-3 flex items-center gap-2 text-[#054C73] font-medium hover:opacity-80 px-3 py-1 border-l rounded"
+        >
           <FiPlus />
           New Organization
         </button>
@@ -50,8 +55,7 @@ const Sidebar = () => {
                     to={item.path}
                     end={item.path === "/dashboard"}
                     className={({ isActive }) =>
-                      `
-                      flex items-center gap-3
+                      `flex items-center gap-3
                       px-3 py-2.5 rounded-lg
                       transition-colors
                       ${
@@ -74,8 +78,10 @@ const Sidebar = () => {
 
       {/* Logout */}
       <div className="border-t p-4">
-        <button onClick={handleLogout}
-        className="flex items-center gap-2 text-red-500 hover:text-red-600 transition-colors">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 text-red-500 hover:text-red-600 transition-colors"
+        >
           <FiLogOut />
           Leave Dashboard
         </button>

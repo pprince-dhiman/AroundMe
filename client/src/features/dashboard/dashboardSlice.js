@@ -5,6 +5,7 @@ const initialState = {
   eventDetail: null,
   orgs: null,
   dashboardOrgDetail: null,
+  orgId: null,
 };
 
 const dashboardSlice = createSlice({
@@ -23,6 +24,9 @@ const dashboardSlice = createSlice({
     setDashboardOrgDetails: (state, action) => {
       state.dashboardOrgDetail = action.payload;
     },
+    setDashboardOrgId: (state, action) => {
+      state.orgId = action.payload;
+    }
   },
 });
 
@@ -31,5 +35,6 @@ export const {
   setDashboardEvent,
   setDashboardOrgs,
   setDashboardOrgDetails,
+  setDashboardOrgId
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;
