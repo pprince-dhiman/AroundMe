@@ -4,7 +4,6 @@ export const createWorkshopSchema = z.object({
     // validations for event(base) data 
     title: z.string().trim().min(5),
     description: z.string().trim().min(15),
-    thumbnail: z.string(),
     mode: z.enum(['online', 'offline']),
     // venue and onlineLink depends on the mode, so they are handled in WorkshopService.
     venue: z.object({
@@ -28,7 +27,7 @@ export const createWorkshopSchema = z.object({
     FAQs: z.array(z.object({
         question: z.string(),
         answer: z.string()
-    })).min(2),
+    })).min(1),
 
     // validation for workshop data
     instructor: z.object({
