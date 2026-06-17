@@ -96,5 +96,50 @@ export const createWorkshopDefaultValues = {
       startTime: "",
       endTime: "",
     },
-  ]
+  ],
+};
+
+export const createCulturalEventDefaultValues = {
+  title: "",
+  description: "",
+  mode: "",
+  venue: {
+    address: "",
+    city: "",
+    state: "",
+    country: "",
+  },
+  onlineLink: "",
+  startDateTime: "",
+  endDateTime: "",
+  registrationDeadline: "",
+  maxParticipants: 0,
+  pricing: {
+    isFree: true,
+    amount: 0,
+    discount: 0,
+    currency: "INR",
+  },
+  sponsors: [],
+  FAQs: [
+    {
+      question: "",
+      answer: "",
+    },
+  ],
+  performers: [
+    {
+      name: "",
+      image: "",
+      role: "",
+    },
+  ],
+  dressCode: "any",
+  passes: [
+    {
+      name: "general",
+      price: "",
+      quantity: "",
+    },
+  ],
 };
