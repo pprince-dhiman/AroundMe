@@ -16,10 +16,9 @@ import RulesSection from "../../components/owner/event/common/RulesSection";
 import { createHackathonDefaultValues } from "../../utils/defaultValues";
 import PriceSection from "../../components/owner/event/common/PriceSection";
 import axios from "axios";
-import { useParams } from "react-router";
-import { ORG_BACKEND_API } from "../../utils/constant";
+import { useNavigate, useParams } from "react-router";
 import { getToken } from "@clerk/react";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 
 const CreateHackathon = () => {
   const {
@@ -27,7 +26,8 @@ const CreateHackathon = () => {
     handleSubmit,
     watch,
     control,
-    formState: { errors, isSubmitting },
+    reset,
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(createHackathonSchema),
     defaultValues: createHackathonDefaultValues,
@@ -100,59 +100,76 @@ const CreateHackathon = () => {
 
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailPreview, setThumnailPreview] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const params = useParams();
+  const navigate = useNavigate();
   const { orgId } = params;
 
-  const submitFrom = async (data) => {
+  const submitForm = async (data) => {
     const token = await getToken();
 
+    const formData = new FormData();
+
+    formData.append("thumbnail", thumbnail);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("mode", mode);
+    formData.append("venue", JSON.stringify(data.venue));
+    formData.append("onlineLink", data.onlineLink);
+    formData.append("startDateTime", data.startDateTime);
+    formData.append("endDateTime", data.endDateTime);
+    formData.append("registrationDeadline", data.registrationDeadline);
+    formData.append("maxParticipants", data.maxParticipants);
+    formData.append("pricing", JSON.stringify(data.pricing));
+    formData.append("sponsors", JSON.stringify(data.sponsors));
+    formData.append("FAQs", JSON.stringify(data.FAQs));
+    formData.append("teamSize", JSON.stringify(data.teamSize));
+    formData.append("prizes", JSON.stringify(data.prizes));
+    formData.append("tracks", JSON.stringify(data.tracks));
+    formData.append(
+      "problemStatements",
+      JSON.stringify(data.problemStatements),
+    );
+    formData.append("mentors", JSON.stringify(data.mentors));
+    formData.append("judges", JSON.stringify(data.judges));
+    formData.append("judgingCriteria", JSON.stringify(data.judgingCriteria));
+    formData.append(
+      "submissionDeadline",
+      JSON.stringify(data.submissionDeadline),
+    );
+    formData.append("rules", JSON.stringify(data.rules));
+
     try {
-      const formData = new FormData();
-      formData.append("thumbnail", thumbnail);
-      formData.append("title", data.title);
-      formData.append("description", data.description);
-      formData.append("mode", mode);
-      formData.append("venue", data.venue);
-      formData.append("onlineLink", data.onlineLink);
-      formData.append("startDateTime", data.startDateTime);
-      formData.append("endDateTime", data.endDateTime);
-      formData.append("registrationDeadline", data.registrationDeadline);
-      formData.append("maxParticipants", data.maxParticipants);
-      formData.append("pricing", data.pricing);
-      formData.append("sponsors", data.sponsors);
-      formData.append("FAQs", data.FAQs);
-      formData.append("teamSize", data.teamSize);
-      formData.append("prizes", data.prizes);
-      formData.append("tracks", data.tracks);
-      formData.append("problemStatements", data.problemStatements);
-      formData.append("mentors", data.mentors);
-      formData.append("judges", data.judges);
-      formData.append("judgingCriteria", data.judgingCriteria);
-      formData.append("submissionDeadline", data.submissionDeadline);
-      formData.append("rules", data.rules);
+      setIsSubmitting(true);
 
       const res = await axios.post(
-        `${ORG_BACKEND_API}/${orgId}/hackathons`,
+        `http://localhost:8000/api/v1/orgs/${orgId}/hackathons`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },
         },
       );
 
-      if(res.data.success){
+      if (res.data.success) {
         toast.success(res.data.message);
+        reset(createHackathonDefaultValues);
+        setThumbnail(null);
+        setThumnailPreview(null);
+        navigate(`/organizer/organizations/${orgId}`);
       } else {
         toast.warning(res.data.message);
       }
     } catch (err) {
       console.log(err);
       toast.error(err.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleThumbnailChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     if (!file) return;
 
     setThumbnail(file);
@@ -168,7 +185,7 @@ const CreateHackathon = () => {
       </div>
 
       <form
-        onSubmit={handleSubmit(submitFrom, (errors) => {
+        onSubmit={handleSubmit(submitForm, (errors) => {
           console.log("Validation Errors:", errors);
         })}
       >
@@ -195,8 +212,6 @@ const CreateHackathon = () => {
                 <span className="text-red-500 ml-1">*</span>
 
                 <select
-                  // value={mode}
-                  // onChange={(e) => setMode(e.target.value)}
                   {...register("mode")}
                   className="mt-1 w-full rounded-lg border border-gray-300 px-4 py-2.5 "
                   required
@@ -303,7 +318,7 @@ const CreateHackathon = () => {
 
           <div className="grid grid-cols-4">
             <DateInput
-              label="Maximum Participants"
+              label="Maximum Teams"
               type="number"
               error={errors.maxParticipants}
               {...register("maxParticipants")}
@@ -409,7 +424,7 @@ const CreateHackathon = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className=" px-8 py-3 rounded-xl bg-[#054C73] text-white font-medium hover:opacity-90 disabled:opacity-60 "
+            className="px-8 py-3 rounded-xl bg-[#054C73] text-white font-medium hover:opacity-90 disabled:opacity-60 "
           >
             {isSubmitting ? "Creating..." : "Create Organization"}
           </button>
