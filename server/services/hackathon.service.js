@@ -2,12 +2,22 @@ import mongoose from "mongoose"
 import Organization from "../models/organization.js";
 import Event from "../models/event.js";
 import Hackathon from "../models/hackathon.js";
+import { getDataURI } from "../utils/DataUri.js";
+import cloudinary from "../utils/cloudinary.js";
 
-export const createHackathonService = async ({ body, orgId, userId }) => {
+export const createHackathonService = async ({ body, orgId, userId, file }) => {
     // creating a session, bcz I need to work on 2 models at the same time.
     // event(base) + hackathon(detailed) => if 1 fails -> none should save document.
     const session = await mongoose.startSession();
     session.startTransaction();
+
+    //upload thumbnail to cloudinary
+    const dataURI = getDataURI(file);
+    const fileUrl = await cloudinary.uploader.upload(dataURI.content, {
+        resource_type: "image",
+        folder: "AroundMe/Hackathon/Thumbnails"
+    });
+    const thumbnailUrl = fileUrl.secure_url;
 
     try {
         const organization = await Organization.findById(orgId).session(session);
@@ -23,7 +33,7 @@ export const createHackathonService = async ({ body, orgId, userId }) => {
                 organization: orgId,
                 organizer: userId,
                 category: 'Hackathon',
-                thumbnail: body.thumbnail,
+                thumbnail: thumbnailUrl,
                 mode: body.mode,
                 startDateTime: body.startDateTime,
                 endDateTime: body.endDateTime,
