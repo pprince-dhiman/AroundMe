@@ -9,7 +9,7 @@ const validate = (schema) => {
       return res.status(400).json({ success: false, message: err });
     }
   };
-}; 
+};
 
 // zod schema is passed.
 export const validateHackathon = (schema) => {
@@ -54,12 +54,35 @@ export const validateWorkshop = (schema) => {
       req.body.skillLevel = JSON.parse(req.body.skillLevel);
       req.body.prerequisites = JSON.parse(req.body.prerequisites);
       req.body.agenda = JSON.parse(req.body.agenda);
-       
+
       // validate the incoming body
       req.body = schema.parse(req.body);
       next();
     } catch (err) {
-      console.log("Issues in validation: ",err);
+      console.log("Issues in validation: ", err);
+      return res.status(400).json({ success: false, message: err });
+    }
+  };
+};
+
+export const validateCulturalEvent = (schema) => {
+  // returns a middleware
+  return (req, res, next) => {
+    try {
+      // parse the complex data of incoming body (str -> obj/arr)
+      req.body.venue = JSON.parse(req.body.venue);
+      req.body.pricing = JSON.parse(req.body.pricing);
+      req.body.sponsors = JSON.parse(req.body.sponsors);
+      req.body.FAQs = JSON.parse(req.body.FAQs);
+      req.body.performers = JSON.parse(req.body.performers);
+      req.body.dressCode = JSON.parse(req.body.dressCode);
+      req.body.passes = JSON.parse(req.body.passes);
+
+      // validate the incoming body
+      req.body = schema.parse(req.body);
+      next();
+    } catch (err) {
+      console.log("Issues in validation: ", err);
       return res.status(400).json({ success: false, message: err });
     }
   };
