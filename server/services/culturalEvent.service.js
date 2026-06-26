@@ -4,6 +4,7 @@ import Event from "../models/event.js";
 import CulturalEvent from "../models/culturalEvent.js";
 import { getDataURI } from "../utils/DataUri.js";
 import cloudinary from "../utils/cloudinary.js";
+import { getCoordinates } from "./geocoding.service.js";
 
 export const createCulturalEventService = async ({
   body,
@@ -52,7 +53,13 @@ export const createCulturalEventService = async ({
     );
 
     if (body.mode === "offline") {
-      event[0].venue = body.venue;
+      const coordinates = await getCoordinates(body.venue);
+      const venue = {
+        ...body.venue,
+        coordinates,
+      };
+
+      event[0].venue = venue;
     }
     if (body.mode === "online") {
       event[0].onlineLink = body.onlineLink;

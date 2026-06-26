@@ -20,6 +20,10 @@ const OrganizationDetail = () => {
   const org = orgDetails?.org;
   const events = orgDetails?.orgEvents;
 
+  const coordinates = org?.location?.coordinates;
+  const lat = coordinates?.lat;
+  const lon = coordinates?.lon;  
+
   return org ? (
     <div className="min-h-screen bg-[#F2F5FF]">
       <div className="mx-auto max-w-7xl space-y-6 px-4 py-6">
@@ -29,7 +33,7 @@ const OrganizationDetail = () => {
 
         <OrganizationEvents events={events} org={org} />
 
-        <AdminMap org={org} />
+        <AdminMap lat={lat} lon={lon} />
 
         <EditOrganization
           isOpen={isEditOpen}

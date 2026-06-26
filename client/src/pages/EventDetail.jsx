@@ -242,7 +242,9 @@ const EventDetail = () => {
 
                 <div className="mt-3 flex items-end gap-3">
                   <h3 className="text-4xl font-bold text-[#054C73]">
-                    {event.pricing.isFree ? "FREE" : `₹ ${calculateAmount(event.pricing)}`}
+                    {event.pricing.isFree
+                      ? "FREE"
+                      : `₹ ${calculateAmount(event.pricing)}`}
                   </h3>
 
                   {event.pricing.discount > 0 && (

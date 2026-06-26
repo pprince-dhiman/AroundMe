@@ -1,15 +1,10 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-function AdminMap({ org }) {
-  const coordinates = org?.location?.coordinates;
-  const lat = coordinates?.lat;
-  const lon = coordinates?.lon;
-
-  if (!lat || !lon) {
-    return <></>;
-  }
-
-  return (
+function AdminMap({ lat, lon }) {
+  console.log("lat", lat, "lon", lon);
+  return !lat || !lon ? (
+    <></>
+  ) : (
     <MapContainer
       center={[lat, lon]}
       zoom={13}
@@ -24,7 +19,7 @@ function AdminMap({ org }) {
       />
 
       <Marker position={[lat, lon]}>
-        <Popup>Organization Address</Popup>
+        <Popup>Location</Popup>
       </Marker>
     </MapContainer>
   );

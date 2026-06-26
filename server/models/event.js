@@ -47,7 +47,7 @@ const eventSchema = new mongoose.Schema(
       country: String,
       coordinates: {
         lat: Number,
-        lng: Number,
+        lon: Number,
       },
     },
     onlineLink: {

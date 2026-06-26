@@ -4,6 +4,7 @@ import Workshop from "../models/workshop.js";
 import Organization from "../models/organization.js";
 import { getDataURI } from "../utils/DataUri.js";
 import cloudinary from "../utils/cloudinary.js";
+import { getCoordinates } from "./geocoding.service.js";
 
 export const createWorkshopService = async (body, orgId, userId, file) => {
   const session = await mongoose.startSession();
@@ -52,7 +53,13 @@ export const createWorkshopService = async (body, orgId, userId, file) => {
     }
     // venue,
     if (body && body.mode === "offline") {
-      event[0].venue = body.venue;
+      const coordinates = await getCoordinates(body.venue);
+      const venue = {
+        ...body.venue,
+        coordinates,
+      };
+      
+      event[0].venue = venue;
     }
 
     // workshop session

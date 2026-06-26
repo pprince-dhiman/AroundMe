@@ -15,6 +15,7 @@ import WorkshopSection from "../../components/owner/event/WorkshopSection";
 import CulturalEventSection from "../../components/owner/event/CulturalEventSection";
 import UpdateEvent from "../../components/owner/event/UpdateEvent";
 import { useState } from "react";
+import AdminMap from "../../components/owner/AdminMap";
 
 export default function ViewEvent() {
   const params = useParams();
@@ -23,6 +24,12 @@ export default function ViewEvent() {
   useGetDashboardEvent(eventId);
 
   const event = useSelector((state) => state.dashboard.eventDetail);
+
+  const coordinates = event?.venue?.coordinates;
+  const lat = coordinates?.lat;
+  const lon = coordinates?.lon;
+
+  console.log("coordinates: ", lat, lon);
 
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
@@ -34,7 +41,7 @@ export default function ViewEvent() {
     <div className="mx-auto max-w-7xl p-6">
       <EventHeader event={event} />
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_280px]">
+      <div className="my-6 grid gap-6 lg:grid-cols-[1fr_280px]">
         {/* Main Content */}
         <div className="space-y-6">
           <InfoSection event={event} />
@@ -59,7 +66,7 @@ export default function ViewEvent() {
         </div>
 
         {/* Sticky Sidebar */}
-        <EventActions onUpdate={() => setIsUpdateModalOpen(true)}/>
+        <EventActions onUpdate={() => setIsUpdateModalOpen(true)} />
 
         <UpdateEvent
           isOpen={isUpdateModalOpen}
@@ -67,6 +74,9 @@ export default function ViewEvent() {
           event={event}
         />
       </div>
+
+      {/* Event location map */}
+      <AdminMap lat={lat} lon={lon} />
     </div>
   );
 }
