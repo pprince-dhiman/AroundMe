@@ -40,6 +40,7 @@ const App = () => {
         <Route path="/organizer" element={<OwnerDashboardLayout />}>
           <Route path="dashboard" element={<DashboardHome />} />
           <Route path="events" element={<Events />} />
+          {/* Dashboard event detail page */}
           <Route path="events/:eventId" element={<ViewEvent />} />
           <Route path="organizations" element={<Organization />} />
           <Route path="organizations/new" element={<CreateOrganization />} />
