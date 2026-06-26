@@ -15,7 +15,7 @@ import WorkshopSection from "../../components/owner/event/WorkshopSection";
 import CulturalEventSection from "../../components/owner/event/CulturalEventSection";
 import UpdateEvent from "../../components/owner/event/UpdateEvent";
 import { useState } from "react";
-import AdminMap from "../../components/owner/AdminMap";
+import Map from "../../components/Map";
 
 export default function ViewEvent() {
   const params = useParams();
@@ -76,7 +76,7 @@ export default function ViewEvent() {
       </div>
 
       {/* Event location map */}
-      <AdminMap lat={lat} lon={lon} />
+      <Map lat={lat} lon={lon} />
     </div>
   );
 }
