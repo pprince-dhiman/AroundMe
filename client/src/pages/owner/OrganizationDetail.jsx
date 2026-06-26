@@ -7,6 +7,7 @@ import { useParams } from "react-router";
 import Loading from "../../components/Loading";
 import useGetDashboardOrgDetail from "../../hooks/useGetDashboardOrgDetail";
 import { useSelector } from "react-redux";
+import AdminMap from "../../components/owner/AdminMap";
 
 const OrganizationDetail = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -26,7 +27,9 @@ const OrganizationDetail = () => {
 
         <OrganizationAbout org={org} />
 
-        <OrganizationEvents events={events} org={org}/>
+        <OrganizationEvents events={events} org={org} />
+
+        <AdminMap org={org} />
 
         <EditOrganization
           isOpen={isEditOpen}

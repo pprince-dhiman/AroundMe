@@ -293,24 +293,32 @@ const CreateOrganization = () => {
             <FormInput
               label="Address"
               error={errors.location?.address}
+              required
+              placeholder="Sector 62"
               {...register("location.address")}
             />
 
             <FormInput
               label="City"
               error={errors.location?.city}
+              required
+              placeholder="Noida"
               {...register("location.city")}
             />
 
             <FormInput
               label="State"
               error={errors.location?.state}
+              required
+              placeholder="Uttar Pradesh"
               {...register("location.state")}
             />
 
             <FormInput
               label="Country"
               error={errors.location?.country}
+              required
+              placeholder="India"
               {...register("location.country")}
             />
           </div>

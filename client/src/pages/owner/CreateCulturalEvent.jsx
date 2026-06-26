@@ -290,7 +290,7 @@ const CreateCulturalEvent = () => {
 
         {/* Cultural Event detail */}
         <section className="bg-white rounded-2xl border p-6 my-5">
-          <h2 className="text-xl font-semibold my-5">Workshop Detail</h2>
+          <h2 className="text-xl font-semibold my-5">Cultural Event Detail</h2>
 
           {/* Pricing section */}
           <PriceSection register={register} watch={watch} errors={errors} />

@@ -26,7 +26,7 @@ export default function EventCard({ event }) {
             </span>
 
             <h3 className="mt-1 line-clamp-2 text-lg font-bold text-gray-900">
-              {event.title}
+              {event.title.length <= 20 ? event.title : `${event.title.slice(0,20)}...`}
             </h3>
           </div>
 

@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from "react-router"
 import { ClerkProvider } from "@clerk/react"
 import './index.css'
+import "leaflet/dist/leaflet.css";
 import App from './App.jsx'
 import { store } from './app/store.js'
 import { Provider } from "react-redux"

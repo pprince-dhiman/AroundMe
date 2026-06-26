@@ -26,21 +26,36 @@ const OrganizationEvents = ({ events, org }) => {
           {showMenu && (
             <div className="absolute right-0 z-10 mt-2 w-48 overflow-hidden rounded-lg border bg-white shadow-lg">
               <button
-                onClick={() => navigate(`/organizer/organizations/${org._id}/event/hackathon/new`)}
+                onClick={() => {
+                  navigate(
+                    `/organizer/organizations/${org._id}/event/hackathon/new`,
+                  );
+                  scrollTo(0, 0);
+                }}
                 className="block w-full px-4 py-3 text-left hover:bg-gray-100"
               >
                 Hackathon
               </button>
 
               <button
-                onClick={() => navigate(`/organizer/organizations/${org._id}/event/workshop/new`)}
+                onClick={() => {
+                  navigate(
+                    `/organizer/organizations/${org._id}/event/workshop/new`,
+                  );
+                  scrollTo(0, 0);
+                }}
                 className="block w-full px-4 py-3 text-left hover:bg-gray-100"
               >
                 Workshop
               </button>
 
               <button
-                onClick={() => navigate(`/organizer/organizations/${org._id}/event/cultural-event/new`)}
+                onClick={() =>{
+                  navigate(
+                    `/organizer/organizations/${org._id}/event/cultural-event/new`,
+                  );
+                  scrollTo(0,0);
+                }}
                 className="block w-full px-4 py-3 text-left hover:bg-gray-100"
               >
                 Cultural Event
