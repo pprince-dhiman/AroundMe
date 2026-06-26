@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaTicketAlt, FaHeart, FaBars, FaTimes } from "react-icons/fa";
+import { FaTicketAlt, FaHeart, FaBars, FaTimes, FaBuilding, FaCalendarAlt } from "react-icons/fa";
 
 import { useNavigate, Link } from "react-router";
 import {
@@ -65,10 +65,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#DFE9F4]/80 border-b border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
       {/* NAVBAR CONTAINER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="h-20 flex items-center justify-between">
+        <div className="h-16 flex items-center justify-between">
           {/* LOGO */}
           <div
             onClick={() => navigate("/")}
@@ -86,46 +86,26 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Link
-            className="text-gray-900 font-medium hover:underline hover:text-[#054C73]"
-            to="/organizations"
-          >
-            Organizations
-          </Link>
+          <div className="hidden md:flex items-center gap-8">
+            <Link
+              to="/organizations"
+              className="text-gray-700 font-semibold hover:text-[#054C73] transition-colors"
+            >
+              Organizations
+            </Link>
 
-          <Link
-            className="text-gray-900 font-medium hover:underline hover:text-[#054C73]"
-            to="/events"
-          >
-            Events
-          </Link>
+            <Link
+              to="/events"
+              className="text-gray-700 font-semibold hover:text-[#054C73] transition-colors"
+            >
+              Events
+            </Link>
+          </div>
 
           {/* DESKTOP NAVIGATION */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-4">
             {user && (
               <>
-                {/* My Tickets */}
-                <Link
-                  to="/my-tickets"
-                  className="px-5 py-3 rounded-2xl text-[#333333] font-medium transition-all duration-300 hover:text-[#054C73] hover:shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
-                >
-                  <span className="flex items-center gap-2">
-                    <FaTicketAlt />
-                    My Tickets
-                  </span>
-                </Link>
-
-                {/* Saved */}
-                <Link
-                  to="/saved"
-                  className="px-5 py-3 rounded-2xl text-[#333333] font-medium transition-all duration-300 hover:text-[#054C73] hover:shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
-                >
-                  <span className="flex items-center gap-2">
-                    <FaHeart />
-                    Saved
-                  </span>
-                </Link>
-
                 {/* ORGANIZER BUTTON */}
                 <button
                   onClick={
@@ -133,7 +113,7 @@ const Navbar = () => {
                       ? becomeOrganizerFn
                       : dashboardFn
                   }
-                  className="px-6 py-3 rounded-2xl bg-[#054C73] text-white font-semibold transition-all duration-300 hover:bg-[#04344e] active:scale-95"
+                  className="px-5 py-2.5 border border-[#054C73] rounded-lg hover:bg-[#054C73] hover:text-white font-medium transition-colors"
                 >
                   {user.publicMetadata.role === "user"
                     ? isLoading
@@ -150,16 +130,30 @@ const Navbar = () => {
                 <Show when="signed-out">
                   <div className="flex items-center gap-3">
                     {/* Sign In */}
-                    <SignInButton className="px-5 py-2.5 rounded-2xl bg-[#054C73] text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer" />
+                    <SignInButton className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition cursor-pointer" />
 
                     {/* Sign Up */}
-                    <SignUpButton className="px-5 py-2.5 rounded-2xl border border-[#054C73] text-[#054C73] font-medium transition-all duration-300 hover:bg-[#054C73] hover:text-white cursor-pointer" />
+                    <SignUpButton className="px-4 py-2 rounded-lg bg-[#054C73] text-white hover:bg-[#04344e] transition cursor-pointer" />
                   </div>
                 </Show>
 
                 <Show when="signed-in">
-                  <div className="border-2 border-[#054C73]/70 px-1 pt-1 rounded-full">
-                    <UserButton />
+                  <div className="border border-gray-200 rounded-full p-1">
+                    <UserButton>
+                      <UserButton.MenuItems>
+                        <UserButton.Link
+                          label="My Tickets"
+                          labelIcon={<FaTicketAlt />}
+                          href="/my-tickets"
+                        />
+
+                        <UserButton.Link
+                          label="Saved"
+                          labelIcon={<FaHeart />}
+                          href="/saved"
+                        />
+                      </UserButton.MenuItems>
+                    </UserButton>
                   </div>
                 </Show>
               </div>
@@ -173,9 +167,9 @@ const Navbar = () => {
           {/* MOBILE MENU BUTTON */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden w-12 h-12 rounded-2xl bg-[#DFE9F4] flex items-center justify-center text-[#333333] shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
+            className="lg:hidden h-10 w-10 flex items-center justify-center rounded-lg hover:bg-gray-100 transition"
           >
-            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+            {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
           </button>
         </div>
       </div>
@@ -183,31 +177,31 @@ const Navbar = () => {
       {/* MOBILE MENU */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-500 ${
-          isMobileMenuOpen ? "max-h-150 opacity-100 py-5" : "max-h-0 opacity-0"
+          isMobileMenuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-5 pb-6">
-          <div className="bg-[#DFE9F4] rounded-4xl p-5 shadow-[12px_12px_25px_#c7d0da,-12px_-12px_25px_#ffffff] space-y-4">
+        <div className="px-4 pb-5">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-xl p-4">
             {/* SIGNED OUT */}
             {!user && (
               <div className="flex flex-col gap-3">
-                <SignInButton className="w-full py-3 rounded-2xl bg-[#054C73] text-white font-semibold" />
+                <SignInButton className="w-full py-3 rounded-xl bg-[#054C73] text-white font-semibold" />
 
-                <SignUpButton className="w-full py-3 rounded-2xl border border-[#054C73] text-[#054C73] font-semibold" />
+                <SignUpButton className="w-full py-3 rounded-xl border border-[#054C73] text-[#054C73] font-semibold" />
               </div>
             )}
 
             {/* SIGNED IN */}
             {user && (
               <>
-                {/* Organizer Button */}
+                {/* PRIMARY ACTION */}
                 <button
                   onClick={
                     user.publicMetadata.role === "user"
                       ? becomeOrganizerFn
                       : dashboardFn
                   }
-                  className="w-full py-4 rounded-2xl bg-[#054C73] text-white font-semibold"
+                  className="w-full py-4 rounded-2xl border border-[#054C73] font-semibold hover:bg-[#054C73] hover:text-white"
                 >
                   {user.publicMetadata.role === "user"
                     ? isLoading
@@ -216,32 +210,55 @@ const Navbar = () => {
                     : "Dashboard"}
                 </button>
 
-                {/* LINKS */}
-                <div className="flex flex-col gap-3">
+                {/* NAVIGATION */}
+                <div className="mt-4 flex flex-col gap-2">
+                  <Link
+                    to="/organizations"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-gray-50 transition"
+                  >
+                    <FaBuilding className="text-[#054C73]" />
+                    <span>Organizations</span>
+                  </Link>
+
+                  <Link
+                    to="/events"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-gray-50 transition"
+                  >
+                    <FaCalendarAlt className="text-[#054C73]" />
+                    <span>Events</span>
+                  </Link>
+
                   <Link
                     to="/my-tickets"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center gap-3 px-4 py-4 rounded-2xl text-[#333333] font-medium shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
+                    className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-gray-50 transition"
                   >
                     <FaTicketAlt className="text-[#054C73]" />
-                    My Tickets
+                    <span>My Tickets</span>
                   </Link>
 
                   <Link
                     to="/saved"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center gap-3 px-4 py-4 rounded-2xl text-[#333333] font-medium shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]"
+                    className="flex items-center gap-3 px-4 py-4 rounded-xl hover:bg-gray-50 transition"
                   >
                     <FaHeart className="text-[#054C73]" />
-                    Saved Events
+                    <span>Saved Events</span>
                   </Link>
                 </div>
 
-                {/* USER BUTTON */}
-                <div className="flex justify-center pt-2">
-                  <div className="bg-[#DFE9F4] rounded-2xl p-1 shadow-[6px_6px_15px_#c7d0da,-6px_-6px_15px_#ffffff]">
-                    <UserButton />
-                  </div>
+                {/* DIVIDER */}
+                <div className="my-4 border-t border-gray-200" />
+
+                {/* PROFILE */}
+                <div className="flex items-center justify-between px-2">
+                  <span className="text-sm font-medium text-gray-500">
+                    Account
+                  </span>
+
+                  <UserButton />
                 </div>
               </>
             )}
