@@ -2,6 +2,7 @@ import Event from "../models/event.js";
 import Organization from "../models/organization.js";
 import { getDataURI } from "../utils/DataUri.js";
 import cloudinary from "../utils/cloudinary.js";
+import { getCoordinates } from "./geocoding.service.js";
 
 export const createOrganizationService = async ({ body, userId, file }) => {
   try {
@@ -45,7 +46,15 @@ export const createOrganizationService = async ({ body, userId, file }) => {
       }
     }
 
-    // Add logo and banner through cloudinary
+    // location coordinates from address.
+    const coordinates = await getCoordinates(body.location);
+    
+    const location = {
+      ...body.location,
+      coordinates,
+    };
+
+    console.log(location);
 
     const organization = await Organization.create({
       name: name,
@@ -56,7 +65,7 @@ export const createOrganizationService = async ({ body, userId, file }) => {
       banner: bannerUrl.secure_url,
       phone: body.phone,
       website: body.website,
-      location: body.location,
+      location: location,
       organizationType: body.organizationType,
       foundedYear: body.foundedYear,
       members: body.members,

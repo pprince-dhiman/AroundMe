@@ -1,89 +1,103 @@
 import mongoose from "mongoose";
 
-const organizationSchma = new mongoose.Schema({
+const organizationSchma = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        trim: true,
-        unique: true,
-        required: true,
+      type: String,
+      trim: true,
+      unique: true,
+      required: true,
     },
     description: {
-        type: String,
-        trim: true,
-        required: true,
+      type: String,
+      trim: true,
+      required: true,
     },
     owner: {
-        type: String,
-        ref: 'User',
-        required: true,
+      type: String,
+      ref: "User",
+      required: true,
     },
     logo: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     banner: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        trim: true,
-        unique: true,
-        required: true,
+      type: String,
+      trim: true,
+      unique: true,
+      required: true,
     },
     phone: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
     },
     website: {
-        type: String,
-        default: ""
+      type: String,
+      default: "",
     },
     location: {
-        address: { type: String, required: true, },
-        city: { type: String, required: true, },
-        state: { type: String, required: true, },
-        country: { type: String, required: true, },
+      address: { type: String, required: true },
+      city: { type: String, required: true },
+      state: { type: String, required: true },
+      country: { type: String, required: true },
+      coordinates: { lat: Number, lon: Number },
     },
     organizationType: {
-        type: String,
-        enum: ["college", "company", "community", "startup", "ngo", "school", "other"],
-        default: "other",
+      type: String,
+      enum: [
+        "college",
+        "company",
+        "community",
+        "startup",
+        "ngo",
+        "school",
+        "other",
+      ],
+      default: "other",
     },
     foundedYear: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
-    members: [{
+    members: [
+      {
         user: {
-            type: String,
-            ref: "User",
-            required: true,
+          type: String,
+          ref: "User",
+          required: true,
         },
         role: {
-            type: String,
-            enum: ["owner", "admin", "manager"],
-            default: "manager",
+          type: String,
+          enum: ["owner", "admin", "manager"],
+          default: "manager",
         },
-    }],
+      },
+    ],
     totalWorkshops: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
     totalHackathons: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
     totalCulturalEvents: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
     totalRevenue: {
-        type: Number,
-        default: 0
-    }
-}, { timestamps: true });
+      type: Number,
+      default: 0,
+    },
+  },
+  { timestamps: true },
+);
 
-const Organization = mongoose.model('Organization', organizationSchma);
+const Organization = mongoose.model("Organization", organizationSchma);
 export default Organization;
