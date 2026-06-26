@@ -30,7 +30,11 @@ export const createOrganizationController = async (req, res) => {
 
 export const getAllOrganization = async (req, res) => {
   try {
-    const orgs = await Organization.find({}).populate("owner");
+    const orgs = await Organization.find({})
+      .sort({
+        createdAt: -1,
+      })
+      .populate("owner");
 
     res.json({ success: true, organizations: orgs });
   } catch (err) {
@@ -65,7 +69,9 @@ export const getOrgById = async (req, res) => {
       });
     }
 
-    res.json({ success: true, organization });
+    const events = await Event.find({ organization: organization._id });
+
+    res.json({ success: true, orgDetail: { organization, events } });
   } catch (err) {
     console.log(err);
     res.json({ success: false, messge: err.message });

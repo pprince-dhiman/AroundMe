@@ -1,18 +1,21 @@
-import {
-  FaMapMarkerAlt,
-  FaCalendarAlt,
-  FaGlobe,
-} from "react-icons/fa";
+import { FaMapMarkerAlt, FaCalendarAlt, FaGlobe } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 export default function OrganizationCard({ organization }) {
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden border border-[#E4E7EC] shadow-sm hover:shadow-xl transition-all duration-300 group">
-
+    <div
+      onClick={() => navigate("/organizations/" + organization._id)}
+      className="bg-white rounded-2xl overflow-hidden border border-[#E4E7EC] shadow-sm hover:shadow-xl transition-all duration-300 group"
+    >
       {/* Banner */}
       <div className="relative h-36 overflow-hidden">
         <img
-          src={organization.banner || "https://images.unsplash.com/photo-1522202176988-66273c2fd55f"}
+          src={
+            organization.banner ||
+            "https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+          }
           alt={organization.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
         />
@@ -23,7 +26,6 @@ export default function OrganizationCard({ organization }) {
 
       {/* Content */}
       <div className="p-5 relative">
-
         {/* Logo */}
         <div className="absolute -top-10 left-5">
           <img
@@ -49,7 +51,6 @@ export default function OrganizationCard({ organization }) {
 
         {/* Info */}
         <div className="space-y-2 mb-5">
-
           <div className="flex items-center gap-2 text-sm text-[#667085]">
             <FaMapMarkerAlt className="text-[#2563EB]/80" />
             <span>
@@ -67,7 +68,6 @@ export default function OrganizationCard({ organization }) {
             <span>{organization.website}</span>
           </div>
         </div>
-
       </div>
     </div>
   );

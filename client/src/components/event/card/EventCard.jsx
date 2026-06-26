@@ -1,9 +1,14 @@
 import { FaCalendarAlt } from "react-icons/fa";
 import { getRegistrationDeadline } from "../../../utils/constant";
+import { useNavigate } from "react-router";
 
 export default function EventCard({ event }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="relative bg-white border border-[#DFE9F4] rounded-xl overflow-hidden hover:shadow-md  transition">
+    <div 
+    onClick={()=> navigate('/events/'+event._id)} 
+    className="relative bg-white border border-[#DFE9F4] rounded-xl overflow-hidden hover:shadow-md  transition">
 
       <img
         src={event.thumbnail}

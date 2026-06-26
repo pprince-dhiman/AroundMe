@@ -21,6 +21,7 @@ import CreateHackathon from "./pages/owner/CreateHackathon.jsx";
 import CreateWorkshop from "./pages/owner/CreateWorkshop.jsx";
 import CreateCulturalEvent from "./pages/owner/CreateCulturalEvent.jsx";
 import UnderWorking from "./pages/owner/UnderWorking.jsx";
+import OrgDetail from "./pages/OrgDetail.jsx";
 
 const App = () => {
   const isOrganizer = useMatch("/organizer/*");
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/workshops" element={<AllWorkshops />} />
         <Route path="/cultural-events" element={<AllCulturalEvents />} />
         <Route path="/organizations" element={<Organizatoins />} />
+        <Route path="/organizations/:orgId" element={<OrgDetail />} />
         <Route path="/events" element={<AllEvents />} />
         <Route path="/events/:eventId" element={<EventDetail />} />
         <Route path="/organizer" element={<OwnerDashboardLayout />}>

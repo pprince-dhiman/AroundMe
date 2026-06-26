@@ -180,29 +180,6 @@ const DashboardHome = () => {
             <Loading />
           )}
         </div>
-
-        {/* Status Overview */}
-        {/* <div className="bg-white border rounded-xl p-5">
-          <h2 className="font-semibold text-lg mb-5">Status Overview</h2>
-
-          <div className="space-y-4">
-            {Object.entries(dashboardData?.statusCounts)?.map(
-              ([status, count]) => (
-                <div key={status} className="flex items-center justify-between">
-                  <span className="capitalize text-[#666666]">{status}</span>
-
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      statusBadge[status]
-                    }`}
-                  >
-                    {count}
-                  </span>
-                </div>
-              ),
-            )}
-          </div>
-        </div> */}
       </section>
 
       {/* Bottom Section */}
