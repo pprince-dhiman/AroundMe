@@ -22,6 +22,7 @@ import {
   getStartDateTime,
   getTotalEvents,
 } from "../utils/constant";
+import Map from "../components/Map";
 
 const EventDetail = () => {
   const params = useParams();
@@ -30,6 +31,10 @@ const EventDetail = () => {
   useGetEventById(eventId);
 
   const event = useSelector((state) => state.event.event);
+
+  const coordinates = event?.venue?.coordinates;
+  const lat = coordinates?.lat;
+  const lon = coordinates?.lon;
 
   const category = event?.category;
 
@@ -187,6 +192,10 @@ const EventDetail = () => {
                   ? "ONLINE EVENT"
                   : `${event.venue.address}, ${event.venue.city}, ${event.venue.state}, ${event.venue.country}`}
               </div>
+
+              {
+                event.mode==='offline' ? <Map lat={lat} lon={lon} /> : ""
+              }
             </section>
 
             {/* ================= ORGANIZER ================= */}
