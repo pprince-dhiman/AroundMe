@@ -144,7 +144,7 @@ const CreateHackathon = () => {
       setIsSubmitting(true);
 
       const res = await axios.post(
-        `http://localhost:8000/api/v1/orgs/${orgId}/hackathons`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/orgs/${orgId}/hackathons`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

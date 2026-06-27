@@ -91,7 +91,7 @@ const CreateCulturalEvent = () => {
       setIsSubmitting(true);
 
       const res = await axios.post(
-        `http://localhost:8000/api/v1/orgs/${orgId}/culturalEvents`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/orgs/${orgId}/culturalEvents`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },

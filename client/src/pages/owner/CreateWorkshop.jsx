@@ -92,7 +92,7 @@ const CreateWorkshop = () => {
       setIsSubmitting(true);
 
       const res = await axios.post(
-        `http://localhost:8000/api/v1/orgs/${orgId}/workshops`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/orgs/${orgId}/workshops`,
         formData,
         {
           headers: { Authorization: `Bearer ${token}` },
