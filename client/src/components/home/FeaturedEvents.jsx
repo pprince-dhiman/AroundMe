@@ -1,10 +1,8 @@
-
-import {
-    FaArrowRight,
-} from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import FeaturedEventsCard from "./cards/FeaturedEventsCard";
 import { useSelector } from "react-redux";
 import Loading from "../Loading";
+import { useNavigate } from "react-router";
 
 // const events = [
 //     {
@@ -94,42 +92,48 @@ import Loading from "../Loading";
 // ];
 
 export default function FeaturedEvents() {
-    const events = useSelector((state) => state.event.AllEvents);
+  const events = useSelector((state) => state.event.AllEvents);
+  const navigate = useNavigate();
 
-    return (
-        <section className="bg-[#f5f7fb] py-20 px-6">
-            <div className="max-w-7xl mx-auto">
+  return (
+    <section className="bg-[#f5f7fb] py-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        {/* HEADER */}
+        <div className="flex items-center justify-between mb-10">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900">
+              Featured Events
+            </h2>
 
-                {/* HEADER */}
-                <div className="flex items-center justify-between mb-10">
-                    <div>
-                        <h2 className="text-3xl font-bold text-gray-900">
-                            Featured Events
-                        </h2>
+            <p className="text-gray-500 mt-2 text-sm">
+              Explore trending hackathons, workshops and tech events.
+            </p>
+          </div>
+          {events && (
+            <button
+              onClick={() => {
+                navigate("/events");
+                scrollTo(0, 0);
+              }}
+              className="flex items-center gap-2 text-sm font-medium transition  border rounded px-3 py-1 hover:bg-gray-700 hover:text-white"
+            >
+              View All
+              <FaArrowRight className="text-xs" />
+            </button>
+          )}
+        </div>
 
-                        <p className="text-gray-500 mt-2 text-sm">
-                            Explore trending hackathons, workshops and tech events.
-                        </p>
-                    </div>
-                    {
-                        events && <button className="flex items-center gap-2 text-sm font-medium transition  border rounded px-3 py-1 hover:bg-gray-700 hover:text-white">
-                            View All
-                            <FaArrowRight className="text-xs" />
-                        </button>
-                    }
-
-                </div>
-
-                {/* GRID */}
-                {
-                    events ?
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
-                            {events.slice(0, 4).map((event) => <FeaturedEventsCard key={event._id} event={event} />)}
-                        </div> :
-                        <Loading />
-                }
-
-            </div>
-        </section>
-    );
+        {/* GRID */}
+        {events ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+            {events.slice(0, 4).map((event) => (
+              <FeaturedEventsCard key={event._id} event={event} />
+            ))}
+          </div>
+        ) : (
+          <Loading />
+        )}
+      </div>
+    </section>
+  );
 }

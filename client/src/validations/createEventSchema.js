@@ -11,8 +11,8 @@ export const createEventSchema = z
     description: z
       .string()
       .trim()
-      .min(15, "Description must be at least 15 characters")
-      .max(200, "Description cannot exceed 200 characters"),
+      .min(50, "Description must be at least 50 characters")
+      .max(500, "Description cannot exceed 500 characters"),
 
     mode: z.enum(["online", "offline"], {
       error: "Please select event mode",
