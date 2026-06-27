@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import axios from "axios";
 import { EVENT_BACKEND_API } from "../utils/constant";
 import {useDispatch} from "react-redux";
+import { useUser } from "@clerk/react";
 import { setEvent } from "../features/event/eventSlice";
 
 export default function useGetEventById( eventId ){
   const dispatch = useDispatch();
+  const user = useUser();
 
   useEffect(()=> {
     const fetchEvent = async() => {
@@ -25,5 +27,5 @@ export default function useGetEventById( eventId ){
     }
 
     fetchEvent();
-  }, [dispatch, eventId]);
+  }, [dispatch, eventId, user]);
 }

@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { getToken } from "@clerk/react";
+import { getToken, useUser } from "@clerk/react";
 import { useDispatch } from "react-redux";
 import { USER_BACKEND_API } from "../utils/constant";
 import { setDashboardData } from "../features/dashboard/dashboardSlice";
 
 export default function useGetDashboardData() {
   const dispatch = useDispatch();
+  const user = useUser();
   
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -28,5 +29,5 @@ export default function useGetDashboardData() {
     };
 
     fetchDashboardData();
-  }, [dispatch]);
+  }, [dispatch, user]);
 }

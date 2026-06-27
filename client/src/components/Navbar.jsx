@@ -45,7 +45,7 @@ const Navbar = () => {
       );
 
       if (res.data.success) {
-        navigate("org/dashboard");
+        navigate("organizer/dashboard");
         toast.success(res.data.message);
       } else {
         toast.error(res.data.message);

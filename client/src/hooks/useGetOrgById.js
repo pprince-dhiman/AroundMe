@@ -3,9 +3,11 @@ import axios from "axios";
 import { ORG_BACKEND_API } from "../utils/constant";
 import { setOrgById } from "../features/organization/orgSlice";
 import { useDispatch } from "react-redux";
+import { useUser } from "@clerk/react";
 
 export default function useGetOrgById(orgId) {
   const dispatch = useDispatch();
+  const user = useUser();
 
   useEffect(() => {
     const fetchOrgById = async () => {
@@ -23,5 +25,5 @@ export default function useGetOrgById(orgId) {
     };
 
     fetchOrgById();
-  }, [dispatch, orgId]);
+  }, [dispatch, orgId, user]);
 }

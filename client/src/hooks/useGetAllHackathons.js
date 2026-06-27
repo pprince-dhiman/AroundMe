@@ -2,10 +2,12 @@ import { useEffect } from "react"
 import axios from "axios"
 import { EVENT_BACKEND_API } from "../utils/constant"
 import { useDispatch } from "react-redux"
+import { useUser } from "@clerk/react";
 import { setAllHackathons } from "../features/hackathon/hackathonSlice"
 
 const useGetAllHackathons = () => {
     const dispatch = useDispatch();
+    const user = useUser();
 
     useEffect(() => {
         const fetchAllHackathons = async() => {
@@ -25,7 +27,7 @@ const useGetAllHackathons = () => {
             }
         }
         fetchAllHackathons();
-    }, [dispatch]);
+    }, [dispatch, user]);
 }
 
 export default useGetAllHackathons;

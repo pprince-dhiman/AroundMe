@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import axios from "axios";
-import { getToken } from "@clerk/react";
+import { getToken, useUser } from "@clerk/react";
 import { ORG_BACKEND_API } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { setDashboardOrgDetails } from "../features/dashboard/dashboardSlice";
 
 export default function useGetDashboardOrgDetail(orgId){
   const dispatch = useDispatch();
+  const user = useUser();
 
   useEffect(() => {
     const fetchOrgDetail = async() => {
@@ -22,5 +23,5 @@ export default function useGetDashboardOrgDetail(orgId){
     }
 
     fetchOrgDetail();
-  }, [dispatch, orgId]);
+  }, [user, dispatch, orgId]);
 }

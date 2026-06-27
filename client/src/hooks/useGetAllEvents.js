@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { EVENT_BACKEND_API } from "../utils/constant.js";
-import { useDispatch } from "react-redux";
 import { setAllEvents } from "../features/event/eventSlice.js";
+import { useDispatch } from "react-redux";
+import { useUser } from "@clerk/react";
 import { useNavigate } from "react-router";
 
 export default function useGetAllEvents() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useUser();
 
   useEffect(() => {
     async function getAllEvents() {
@@ -24,5 +26,5 @@ export default function useGetAllEvents() {
       }
     }
     getAllEvents();
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, user]);
 }

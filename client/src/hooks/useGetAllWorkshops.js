@@ -2,10 +2,12 @@ import axios from "axios";
 import { useEffect } from "react";
 import { EVENT_BACKEND_API } from "../utils/constant";
 import { useDispatch } from "react-redux";
+import { useUser } from "@clerk/react";
 import { setAllWorkshops } from "../features/workshop/workshopSlice";
 
 const useGetAllWorkshops = () => {
   const dispatch = useDispatch();
+  const user = useUser();
 
   useEffect(() => {
     const fetchAllWorkshops = async () => {
@@ -20,7 +22,7 @@ const useGetAllWorkshops = () => {
       }
     };
     fetchAllWorkshops();
-  }, [dispatch]);
+  }, [dispatch, user]);
 };
 
 export default useGetAllWorkshops;

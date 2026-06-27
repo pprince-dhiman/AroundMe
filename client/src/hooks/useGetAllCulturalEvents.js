@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import axios from "axios";
 import { EVENT_BACKEND_API } from "../utils/constant";
 import { useDispatch } from "react-redux";
+import { useUser } from "@clerk/react";
 import { setAllCulturalEvents } from "../features/culturalEvent/culturalEventSlice";
 
 export default function useGetAllCulturalEvents() {
   const dispatch = useDispatch();
+  const user = useUser();
 
   useEffect(() => {
     const fetchAllCulturalEvents = async () => {
@@ -20,5 +22,5 @@ export default function useGetAllCulturalEvents() {
       }
     };
     fetchAllCulturalEvents();
-  }, [dispatch]);
+  }, [dispatch, user]);
 }

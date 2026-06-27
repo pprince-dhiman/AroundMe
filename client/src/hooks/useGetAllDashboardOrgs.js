@@ -3,10 +3,12 @@ import { useEffect } from "react";
 import { ORG_BACKEND_API } from "../utils/constant";
 import { getToken } from "@clerk/react";
 import { useDispatch } from "react-redux";
+import { useUser } from "@clerk/react";
 import { setDashboardOrgs } from "../features/dashboard/dashboardSlice";
 
 export default function useGetAllDashboardOrgs() {
   const dispatch = useDispatch();
+  const user = useUser();
 
   useEffect(() => {
     const fetchAllDashboardOrgs = async () => {
@@ -28,5 +30,5 @@ export default function useGetAllDashboardOrgs() {
     };
 
     fetchAllDashboardOrgs();
-  }, [dispatch]);
+  }, [dispatch, user]);
 }

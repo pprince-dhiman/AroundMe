@@ -54,8 +54,6 @@ export const createOrganizationService = async ({ body, userId, file }) => {
       coordinates,
     };
 
-    console.log(location);
-
     const organization = await Organization.create({
       name: name,
       email: email,

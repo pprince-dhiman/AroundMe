@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { USER_BACKEND_API } from "../utils/constant";
-import { getToken } from "@clerk/react";
+import { getToken, useUser } from "@clerk/react";
 import { useDispatch } from "react-redux";
 import { setDashboardEvent } from "../features/dashboard/dashboardSlice";
 
 export default function useGetDashboardEvent( eventId ){
   const dispatch = useDispatch();
+  const user = useUser();
 
   useEffect(()=> {
     const fetchDashboardEvent = async() => {
@@ -30,5 +31,5 @@ export default function useGetDashboardEvent( eventId ){
     }
 
     fetchDashboardEvent();
-  }, [dispatch, eventId]);
+  }, [dispatch, user, eventId]);
 }

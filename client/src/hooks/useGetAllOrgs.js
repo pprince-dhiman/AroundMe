@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { ORG_BACKEND_API } from "../utils/constant";
 import { useDispatch } from "react-redux";
 import { setAllOrgs } from "../features/organization/orgSlice";
+import { useUser } from "@clerk/react";
 
 export default function useGetAllOrgs() {
   const dispatch = useDispatch();
+  const user = useUser();
 
   useEffect(()=>{
     const fetchAllOrgs = async () => {
@@ -22,5 +24,5 @@ export default function useGetAllOrgs() {
     }
 
     fetchAllOrgs();
-  },[dispatch]);
+  },[dispatch, user]);
 }
