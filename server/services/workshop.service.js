@@ -78,8 +78,11 @@ export const createWorkshopService = async (body, orgId, userId, file) => {
 
     //specific event.
     event[0].specificEvent = workshop[0]._id;
+    organization.totalWorkshops += 1;
 
     await event[0].save({ session });
+    await organization.save({ session });
+    
     await session.commitTransaction();
 
     return {

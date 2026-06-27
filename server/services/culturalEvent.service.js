@@ -79,8 +79,11 @@ export const createCulturalEventService = async ({
     );
 
     event[0].specificEvent = culturalEvent[0]._id;
+    organization.totalCulturalEvents += 1;
 
     await event[0].save({ session });
+    await organization.save({ session });
+    
     await session.commitTransaction();
 
     return {

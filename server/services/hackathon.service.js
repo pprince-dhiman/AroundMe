@@ -12,15 +12,15 @@ export const createHackathonService = async ({ body, orgId, userId, file }) => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
-  //upload thumbnail to cloudinary
-  const dataURI = getDataURI(file);
-  const fileUrl = await cloudinary.uploader.upload(dataURI.content, {
-    resource_type: "image",
-    folder: "AroundMe/Hackathon/Thumbnails",
-  });
-  const thumbnailUrl = fileUrl.secure_url;
-
   try {
+    //upload thumbnail to cloudinary
+    const dataURI = getDataURI(file);
+    const fileUrl = await cloudinary.uploader.upload(dataURI.content, {
+      resource_type: "image",
+      folder: "AroundMe/Hackathon/Thumbnails",
+    });
+    const thumbnailUrl = fileUrl.secure_url;
+
     const organization = await Organization.findById(orgId).session(session);
     if (!organization) {
       throw new Error("Registered organization not found.");
@@ -84,8 +84,11 @@ export const createHackathonService = async ({ body, orgId, userId, file }) => {
     );
 
     event[0].specificEvent = hackathon[0]._id;
+    organization.totalHackathons += 1;
 
     await event[0].save({ session });
+    await organization.save({ session });
+
     await session.commitTransaction();
 
     return {
