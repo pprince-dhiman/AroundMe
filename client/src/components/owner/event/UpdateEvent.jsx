@@ -88,9 +88,6 @@ export default function UpdateEvent({ isOpen, onClose, event }) {
     e.preventDefault();
 
     console.log(formData);
-
-    // TODO:
-    // API Integration Later
   };
 
   if (!isOpen) return null;
