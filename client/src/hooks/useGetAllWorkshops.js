@@ -7,7 +7,7 @@ import { setAllWorkshops } from "../features/workshop/workshopSlice";
 
 const useGetAllWorkshops = () => {
   const dispatch = useDispatch();
-  const user = useUser();
+  const { isSignedIn, user } = useUser();
 
   useEffect(() => {
     const fetchAllWorkshops = async () => {
@@ -22,7 +22,7 @@ const useGetAllWorkshops = () => {
       }
     };
     fetchAllWorkshops();
-  }, [dispatch, user]);
+  }, [dispatch, user, isSignedIn]);
 };
 
 export default useGetAllWorkshops;

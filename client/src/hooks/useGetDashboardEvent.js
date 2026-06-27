@@ -7,7 +7,7 @@ import { setDashboardEvent } from "../features/dashboard/dashboardSlice";
 
 export default function useGetDashboardEvent( eventId ){
   const dispatch = useDispatch();
-  const user = useUser();
+  const { isSignedIn, user } = useUser();
 
   useEffect(()=> {
     const fetchDashboardEvent = async() => {
@@ -31,5 +31,5 @@ export default function useGetDashboardEvent( eventId ){
     }
 
     fetchDashboardEvent();
-  }, [dispatch, user, eventId]);
+  }, [dispatch, user, eventId, isSignedIn]);
 }

@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 export default function useGetAllEvents() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useUser();
+  const { isSignedIn, user } = useUser();
 
   useEffect(() => {
     async function getAllEvents() {
@@ -26,5 +26,5 @@ export default function useGetAllEvents() {
       }
     }
     getAllEvents();
-  }, [dispatch, navigate, user]);
+  }, [dispatch, navigate, user, isSignedIn]);
 }

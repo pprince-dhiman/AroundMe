@@ -7,7 +7,7 @@ import { setAllHackathons } from "../features/hackathon/hackathonSlice"
 
 const useGetAllHackathons = () => {
     const dispatch = useDispatch();
-    const user = useUser();
+    const { isSignedIn, user } = useUser();
 
     useEffect(() => {
         const fetchAllHackathons = async() => {
@@ -27,7 +27,7 @@ const useGetAllHackathons = () => {
             }
         }
         fetchAllHackathons();
-    }, [dispatch, user]);
+    }, [dispatch, user, isSignedIn]);
 }
 
 export default useGetAllHackathons;

@@ -7,7 +7,7 @@ import { setEvent } from "../features/event/eventSlice";
 
 export default function useGetEventById( eventId ){
   const dispatch = useDispatch();
-  const user = useUser();
+  const { isSignedIn, user } = useUser();
 
   useEffect(()=> {
     const fetchEvent = async() => {
@@ -27,5 +27,5 @@ export default function useGetEventById( eventId ){
     }
 
     fetchEvent();
-  }, [dispatch, eventId, user]);
+  }, [dispatch, eventId, user, isSignedIn]);
 }

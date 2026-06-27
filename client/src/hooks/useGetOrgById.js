@@ -7,7 +7,7 @@ import { useUser } from "@clerk/react";
 
 export default function useGetOrgById(orgId) {
   const dispatch = useDispatch();
-  const user = useUser();
+  const { isSignedIn, user } = useUser();
 
   useEffect(() => {
     const fetchOrgById = async () => {
@@ -25,5 +25,5 @@ export default function useGetOrgById(orgId) {
     };
 
     fetchOrgById();
-  }, [dispatch, orgId, user]);
+  }, [dispatch, orgId, user, isSignedIn]);
 }

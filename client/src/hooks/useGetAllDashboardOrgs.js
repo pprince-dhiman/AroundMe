@@ -8,7 +8,7 @@ import { setDashboardOrgs } from "../features/dashboard/dashboardSlice";
 
 export default function useGetAllDashboardOrgs() {
   const dispatch = useDispatch();
-  const user = useUser();
+  const { isSignedIn, user } = useUser();
 
   useEffect(() => {
     const fetchAllDashboardOrgs = async () => {
@@ -30,5 +30,5 @@ export default function useGetAllDashboardOrgs() {
     };
 
     fetchAllDashboardOrgs();
-  }, [dispatch, user]);
+  }, [dispatch, user, isSignedIn]);
 }

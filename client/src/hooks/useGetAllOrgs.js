@@ -7,7 +7,7 @@ import { useUser } from "@clerk/react";
 
 export default function useGetAllOrgs() {
   const dispatch = useDispatch();
-  const user = useUser();
+  const { isSignedIn, user } = useUser();
 
   useEffect(()=>{
     const fetchAllOrgs = async () => {
@@ -24,5 +24,5 @@ export default function useGetAllOrgs() {
     }
 
     fetchAllOrgs();
-  },[dispatch, user]);
+  },[dispatch, user, isSignedIn]);
 }

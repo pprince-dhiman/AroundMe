@@ -7,7 +7,7 @@ import { setDashboardOrgDetails } from "../features/dashboard/dashboardSlice";
 
 export default function useGetDashboardOrgDetail(orgId){
   const dispatch = useDispatch();
-  const user = useUser();
+  const { isSignedIn, user } = useUser();
 
   useEffect(() => {
     const fetchOrgDetail = async() => {
@@ -23,5 +23,5 @@ export default function useGetDashboardOrgDetail(orgId){
     }
 
     fetchOrgDetail();
-  }, [user, dispatch, orgId]);
+  }, [user, isSignedIn, dispatch, orgId]);
 }

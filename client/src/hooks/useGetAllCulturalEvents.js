@@ -7,7 +7,7 @@ import { setAllCulturalEvents } from "../features/culturalEvent/culturalEventSli
 
 export default function useGetAllCulturalEvents() {
   const dispatch = useDispatch();
-  const user = useUser();
+  const { isSignedIn, user } = useUser();
 
   useEffect(() => {
     const fetchAllCulturalEvents = async () => {
@@ -22,5 +22,5 @@ export default function useGetAllCulturalEvents() {
       }
     };
     fetchAllCulturalEvents();
-  }, [dispatch, user]);
+  }, [dispatch, user, isSignedIn]);
 }
