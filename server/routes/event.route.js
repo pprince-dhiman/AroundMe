@@ -6,9 +6,9 @@ import { getAllCulturalEvents, getAllEvents, getAllHackathons, getAllWorkshops, 
 const eventRouter = exprpess.Router();
 
 eventRouter.get('/', getAllEvents);
-eventRouter.get('/:eventId', getEventById);
 eventRouter.get('/hackathons', getAllHackathons);
 eventRouter.get('/workshops', getAllWorkshops);
 eventRouter.get('/cultural-events', getAllCulturalEvents);
+eventRouter.get('/:eventId', getEventById);
 
 export default eventRouter;
