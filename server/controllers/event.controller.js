@@ -14,6 +14,7 @@ export const getAllEvents = async (req, res) => {
 export const getEventById = async (req, res) => {
   try {
     const { eventId } = req.params;
+
     const event = await Event.findById(eventId)
       .populate("specificEvent")
       .populate({
